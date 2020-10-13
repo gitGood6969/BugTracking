@@ -1,5 +1,5 @@
 // Package
-package bugtracking;
+package BugTracking;
 
 // Import Libraries
 import javafx.application.Application; 

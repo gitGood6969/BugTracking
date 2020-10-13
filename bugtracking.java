@@ -1,7 +1,7 @@
 // Package
-package bugtracking;
+package BugTracking;
 
-public class bugtracking extends UserLoginUI {
+public class BugTracking extends UserLoginUI {
     public static void main(String[] args) {
         launch(args);
     }

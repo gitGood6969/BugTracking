@@ -1,5 +1,5 @@
 // Package
-package bugtracking;
+package BugTracking;
 
 public class UserInformation {
 /*
