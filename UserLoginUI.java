@@ -8,14 +8,13 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene; 
 import javafx.scene.control.Button; 
 import javafx.scene.control.Label; 
-//import javafx.scene.layout.StackPane;
 import javafx.stage.Stage; 
 import static javafx.application.Application.launch;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class BugTracking extends Application {    
+public class UserLoginUI extends Application {    
  
     Scene scene1;
     Scene scene2;
@@ -28,11 +27,11 @@ public class BugTracking extends Application {
         // Scene1 implementation code here
         Label labelUsername = new Label("Username:");
         TextField usernameTextField = new TextField ();
-        Label labelPassword = new Label("Password:");
+        Label labelPassword = new Label("Password:");  // change to obscure password
         TextField passwordTextField = new TextField ();
         Button btn1 = new Button();
         btn1.setText("Login");
-        btn1.setOnAction(new EventHandler<ActionEvent>() 
+        btn1.setOnAction(new EventHandler<ActionEvent>()  // do event handler to capture user input
         {
             // Code here handles what happens when the button is clicled.
             @Override
@@ -75,15 +74,25 @@ public class BugTracking extends Application {
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
-    
-    public static void main(String[] args) {
-        launch(args);
-    }
 }  
+
+/*
+Need to have variables:
+userName
+userPassword
+EmployeeID
+
+Need to have Methods:
+Display()
+OnLoginSubmit(userName, userPassword, EmployeeID)
+DisplaySuccess();
+DisplayError();
+CheckNull();
+*/
+
 
 /* Websites used:
 http://www.learningaboutelectronics.com/Articles/How-to-create-multiple-scenes-and-switch-between-scenes-in-JavaFX.php
 https://docs.oracle.com/javafx/2/ui_controls/text-field.htm
-
-
+https://docs.oracle.com/javafx/2/ui_controls/password-field.htm
 */
