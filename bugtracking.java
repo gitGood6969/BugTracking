@@ -1,7 +1,8 @@
 // Package
 package bugtracking;
-public class Driver {
+
+public class bugtracking extends UserLoginUI {
     public static void main(String[] args) {
-        BugTracking myObject = new BugTracking();
+        launch(args);
     }
 }
