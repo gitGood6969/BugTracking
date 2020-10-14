@@ -40,14 +40,16 @@ public class UserInformation {
     public void setPasswordMatched(boolean passwordMatched) {this.passwordMatched = passwordMatched;}
 
     // Auxiliary Methods
-    public bool LoginStatus()
+    /*
+   public boolean LoginStatus()
     {
         // WIP
     }
-    public bool ValidateUser(passwordMatched)
+    public boolean ValidateUser(boolean passwordMatched)
     {
         // WIP
     }
+    */
 }
 
 /*
