@@ -48,6 +48,8 @@ public class UserLoginUI extends Application {
             	{
             		System.out.println("User unauthorised.");
             	}
+                usernameTextField.clear();
+                passwordTextField.clear();
             }	
         });
         // Grouping elements together

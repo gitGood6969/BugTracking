@@ -46,7 +46,7 @@ public class UserInformation {
     public void setUserName(String userName)                {this.userName = userName;} 
     public void setUserPassword(String userPassword)        {this.userPassword = userPassword;}
     public void setPasswordMatched(boolean passwordMatched) {this.passwordMatched = passwordMatched;}
-
+    
     // Auxiliary Methods
     /*
     public void fileIO() // WIP
@@ -83,7 +83,7 @@ public class UserInformation {
     public boolean LoginStatus(String userName, String userPassword) // Joseph
     {
        System.out.println("Username is " + userName + " Password is " + userPassword);
-       if (userName.equals("Tom") && userPassword.equals("123"))
+       if (userName.toLowerCase().equals("tom") && userPassword.equals("123"))
        {
            setPasswordMatched(true);
        }
