@@ -1,3 +1,4 @@
+// This is the Boundary Class
 // Package
 package BugTracking;
 
@@ -35,11 +36,19 @@ public class UserLoginUI extends Application {
         {
             // Code here handles what happens when the button is clicled.
             @Override
-            public void handle(ActionEvent event) 
+            public void handle(ActionEvent event)  // Joseph
             {
-                primaryStage.setScene(scene2);
-                System.out.println("User has logged in!");
-            }
+            	UserLoginController loginController = new UserLoginController();
+            	if(loginController.ValidateUser(usernameTextField.getText(), passwordTextField.getText()) == true)
+            	{
+            		primaryStage.setScene(scene2);
+            		System.out.println("User has logged in!");
+            	}
+            	else
+            	{
+            		System.out.println("User unauthorised.");
+            	}
+            }	
         });
         // Grouping elements together
         HBox hbUsername = new HBox(); // For Username Field

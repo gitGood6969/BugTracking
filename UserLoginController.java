@@ -1,3 +1,4 @@
+// This is the Controller Class
 // Package
 package BugTracking;
 
@@ -36,12 +37,13 @@ public class UserLoginController {
     public void setUserPassword(String userPassword) {this.userPassword = userPassword;}
 
     // Auxiliary Methods
-    /*
-    public boolean ValidateUser(String userName, String userPassword,int EmployeeID)
+    public boolean ValidateUser(String userName, String userPassword) // Joseph
     {
-        WIP
+        UserInformation userInformation = new UserInformation();
+        return userInformation.LoginStatus(userName, userPassword);
     }
 
+    /*
     public boolean DisplaySuccess()
     {
         WIP
