@@ -63,7 +63,7 @@ public class UserInformation {
 
             if (myFile.exists() && !myFile.isDirectory()) // If the File already exists then we will read it
             {
-                System.out.println("File already exists.");
+                //System.out.println("File already exists.");
                 Scanner fileReader = new Scanner(myFile);
                 while (fileReader.hasNextLine())
                 {
@@ -87,29 +87,16 @@ public class UserInformation {
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
         catch(IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
     }
-    
-    
+     
     public boolean LoginStatus(String userName, String userPassword) // Joseph
     {// This method does the Authentication.
-        System.out.println("Username is " + userName + " Password is " + userPassword);
-        if (ValidateUser(userName, userPassword)) 
-        {//userName.toLowerCase().equals("tom") && userPassword.equals("123")
-            setPasswordMatched(true);
-        }
-        else {setPasswordMatched(false);}
-        return getPasswordMatched();
-    }
-    
-    public boolean ValidateUser(String userName, String userPassword)
-    {
         fileIO();
-        boolean match = false;
         for(User u: UserList)
         {
-            if (u.getUserName().equals(userName)&& userPassword.equals(userPassword))
-            {match = true;}
+            if (u.getUserName().toLowerCase().equals(userName.toLowerCase()) && u.getUserPassword().equals(userPassword))
+            {setPasswordMatched(true);}
         }
-        return match;
+        return getPasswordMatched();
     }
 }
 
