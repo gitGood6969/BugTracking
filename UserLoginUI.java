@@ -14,6 +14,7 @@ import static javafx.application.Application.launch;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.PasswordField;
 
 public class UserLoginUI extends Application {    
  
@@ -29,12 +30,12 @@ public class UserLoginUI extends Application {
         Label labelUsername = new Label("Username:");
         TextField usernameTextField = new TextField ();
         Label labelPassword = new Label("Password:");  // change to obscure password
-        TextField passwordTextField = new TextField ();
+        PasswordField passwordTextField = new PasswordField ();
         Button btn1 = new Button();
         btn1.setText("Login");
         btn1.setOnAction(new EventHandler<ActionEvent>()  // do event handler to capture user input
         {
-            // Code here handles what happens when the button is clicled.
+            // Code here handles what happens when the button is clicked.
             @Override
             public void handle(ActionEvent event)  // Joseph
             {
@@ -52,7 +53,7 @@ public class UserLoginUI extends Application {
                 passwordTextField.clear();
             }	
         });
-        // Grouping elements together
+        // Scene 1 (User Login)
         HBox hbUsername = new HBox(); // For Username Field
         hbUsername.getChildren().addAll(labelUsername, usernameTextField);
         hbUsername.setSpacing(10);
@@ -64,13 +65,13 @@ public class UserLoginUI extends Application {
         layout1.getChildren().addAll(hbUsername, hbPassword, btn1);
         scene1= new Scene(layout1, 300, 250);
         
-        // Scene2 implementation
+        // Scene2 (User Authenticated)
         Label label2 = new Label("This is the second scene");
         Button btn2 = new Button();
         btn2.setText("Logout");
         btn2.setOnAction(new EventHandler<ActionEvent>() 
         {
-            // Code here handles what happens when the button is clicled.
+            // Code here handles what happens when the button is clicked.
             @Override
             public void handle(ActionEvent event) 
             {
@@ -106,4 +107,5 @@ CheckNull();
 http://www.learningaboutelectronics.com/Articles/How-to-create-multiple-scenes-and-switch-between-scenes-in-JavaFX.php
 https://docs.oracle.com/javafx/2/ui_controls/text-field.htm
 https://docs.oracle.com/javafx/2/ui_controls/password-field.htm
+http://www.java2s.com/Tutorials/Java/JavaFX/0470__JavaFX_PasswordField.htm
 */

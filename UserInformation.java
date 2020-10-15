@@ -18,8 +18,8 @@ public class UserInformation {
     // Default Constructor
     public UserInformation() 
     {// Calls Mutators
-        setUserName("apple");
-        setUserPassword("pear");
+        setUserName("");
+        setUserPassword("");
         setPasswordMatched(false);
     }
 
@@ -42,7 +42,7 @@ public class UserInformation {
     public String getUserPassword()     {return userPassword;}
     public boolean getPasswordMatched() {return passwordMatched;}
 
-    // Mutator Methods
+    // Mutator Methods 
     public void setUserName(String userName)                {this.userName = userName;} 
     public void setUserPassword(String userPassword)        {this.userPassword = userPassword;}
     public void setPasswordMatched(boolean passwordMatched) {this.passwordMatched = passwordMatched;}
@@ -52,7 +52,7 @@ public class UserInformation {
     public void fileIO() // WIP
     {
         try 
-        {
+        { // Create and write to a file
             String fileName = "Sample.txt"; // Specify File Name
             File myFile = new File(fileName); //pass the filename or directory name to File object 
 
@@ -64,7 +64,7 @@ public class UserInformation {
                 myWriter.write("Hello ALICE!\n");
                 myWriter.close();   
             }
-            else // If the File if it already exists
+            else // If the File already exists
             {
                 System.out.println("File already exists.");
                 FileWriter myWriter = new FileWriter(fileName, true);
@@ -80,19 +80,13 @@ public class UserInformation {
         }
     }
     */
+    
     public boolean LoginStatus(String userName, String userPassword) // Joseph
-    {
-       System.out.println("Username is " + userName + " Password is " + userPassword);
-       if (userName.toLowerCase().equals("tom") && userPassword.equals("123"))
-       {
-           setPasswordMatched(true);
-       }
-          else
-          {
-              setPasswordMatched(false);
-          }
-
-       return getPasswordMatched();
+    {// This method does the Authentication.
+        System.out.println("Username is " + userName + " Password is " + userPassword);
+        if (userName.toLowerCase().equals("tom") && userPassword.equals("123")) {setPasswordMatched(true);}
+        else {setPasswordMatched(false);}
+        return getPasswordMatched();
     }
 
     /*
@@ -101,6 +95,23 @@ public class UserInformation {
         // WIP
     }
     */
+
+    // This class below is used when generating an ArrayList of "Users" and populate
+    // each "user" object with the read from file "Username" and "Password"
+    // User Class here (Inner/Nested class)
+    private class user
+    {
+        public void print()
+        {
+            System.out.println("Look who is here!");
+        }
+    }
+    // Accessor Method for Inner Class
+    void displayInner()
+    {
+        user user1 = new user();
+        user1.print();
+    }
 }
 
 /*
@@ -110,5 +121,6 @@ https://www.baeldung.com/java-deep-copy
 https://www.geeksforgeeks.org/file-class-in-java/
 https://www.w3schools.com/java/java_files_create.asp
 https://stackoverflow.com/questions/46683251/how-do-i-write-to-a-new-line-using-filewriter-in-java/46683451
+https://www.tutorialspoint.com/java/java_innerclasses.htm#:~:text=In%20Java%2C%20just%20like%20methods,is%20called%20the%20outer%20class.&text=Following%20is%20the%20syntax%20to%20write%20a%20nested%20class.
 */
 
