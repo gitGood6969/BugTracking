@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage; 
 import static javafx.application.Application.launch;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.PasswordField;
@@ -31,9 +33,16 @@ public class UserLoginUI extends Application
 
         Label labelUsername = new Label("Username:"); // Username Box
         TextField usernameTextField = new TextField ();
+        usernameTextField.setPromptText("Enter your username");
 
         Label labelPassword = new Label("Password:");  // Obscure Password Box
         PasswordField passwordTextField = new PasswordField ();
+        passwordTextField.setPromptText("Enter Password");
+        
+        Alert alert = new Alert(AlertType.WARNING); // Joseph
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText("Invalid Authentication!");
+        alert.setContentText("Wrong Username or Password.");
 
         Button btn1 = new Button(); // Login Button
         btn1.setText("Login");
@@ -50,7 +59,7 @@ public class UserLoginUI extends Application
             	}
             	else
             	{
-                    System.out.println("User unauthorised."); // Prints to command line
+                   alert.showAndWait();
             	}
                 usernameTextField.clear(); // Clears Username Box
                 passwordTextField.clear(); // Clears Password Box
@@ -96,21 +105,6 @@ public class UserLoginUI extends Application
         primaryStage.show(); // Displays the page to appear
     }
 }  
-
-/*
-Need to have variables:
-userName
-userPassword
-EmployeeID
-
-Need to have Methods:
-Display()
-OnLoginSubmit(userName, userPassword, EmployeeID)
-DisplaySuccess();
-DisplayError();
-CheckNull();
-*/
-
 
 /* Websites used:
 http://www.learningaboutelectronics.com/Articles/How-to-create-multiple-scenes-and-switch-between-scenes-in-JavaFX.php
