@@ -53,52 +53,83 @@ public class UserInformation {
     public void setPasswordMatched(boolean passwordMatched) {this.passwordMatched = passwordMatched;}
     
     // Auxiliary Methods
-    
-    public void fileIO() // WIP
+    public void fileIO() 
     {
         try 
         { // Read from database.txt file containing login credentials
-            String fileName = "database.txt"; // Specify File Name
-            File myFile = new File(fileName); // pass the filename or directory name to File object 
+            String fileName = "database.txt"; // File with login credentials
+            File myFile = new File(fileName); 
 
-            if (myFile.exists() && !myFile.isDirectory()) // If the File already exists then we will read it
-            {
-                //System.out.println("File already exists.");
+            if (myFile.exists() && !myFile.isDirectory()) // Check if File exists 
+            {// If so, then we will read it
                 Scanner fileReader = new Scanner(myFile);
                 while (fileReader.hasNextLine())
                 {
                     String data = fileReader.nextLine();
-                    String[] tempArray = data.split(" "); // To Delimit the Username and Password
+                    String[] tempArray = data.split(":"); // To Delimit the Username and Password
                     UserList.add(new User(tempArray[0],tempArray[1]));
-                    //System.out.println(data);
                 }
                 fileReader.close();
             }
-            else // Prompt error if "database" File doesn't exist
-            {
+            else 
+            {// Prompt error if "database" File doesn't exist
                 System.out.println("File: " + myFile.getName() + " is missing! Unable to Authenticate any Users!");
                 System.out.println("Please ensure " + myFile.getName() + " exists before running the program!");
-                //FileWriter myWriter = new FileWriter(fileName, true);
-                //myFile.createNewFile()
-                //myWriter.write("Hello ALICE!\n");
-                //myWriter.close();
+                System.exit(0); // Terminates program if file is missing. 
             }
         } 
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
-        catch(IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
     }
      
     public boolean LoginStatus(String userName, String userPassword) // Joseph
-    {// This method does the Authentication.
-        fileIO();
+    {// This method does the Authentication. // May want to move this to Controller class
+        fileIO(); // Calls fileIO method to setup the arraylist of login credentials
         for(User u: UserList)
         {
             if (u.getUserName().toLowerCase().equals(userName.toLowerCase()) && u.getUserPassword().equals(userPassword))
-            {setPasswordMatched(true);}
+            {setPasswordMatched(true);} // Return true if username and password matches
         }
         return getPasswordMatched();
     }
 }
+
+// This class below is used when generating an ArrayList of "Users" and populate
+// each "user" object with the read from file "Username" and "Password"
+class User {
+    // private variables used to hold each user's login details read from database.txt
+    private String userName;
+    private String userPassword;
+    
+    // Default Constructor
+    User() 
+    {
+        setUserName("");
+        setUserPassword("");
+    } 
+        
+    // Main Constructor 
+    User(String userName, String userPassword) 
+    {
+        setUserName(userName); 
+        setUserPassword(userPassword);
+    }
+    
+    // Copy Constructor (Deep Copy) 
+    User(User temp)
+    {
+        setUserName(temp.getUserName()); 
+        setUserPassword(temp.getUserPassword());
+    }
+
+    // Accessor Methods
+    String getUserName()     {return userName;}
+    String getUserPassword() {return userPassword;}
+
+    // Mutator Methods
+    void setUserName(String userName)         {this.userName = userName;}
+    void setUserPassword(String userPassword) {this.userPassword = userPassword;} 
+}
+
 
 /*
 Websites used:

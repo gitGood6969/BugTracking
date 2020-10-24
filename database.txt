@@ -1,4 +1,3 @@
-UserName Password
-tom 123
-james 951
-plato fish123
+tom:123
+jAmes:951
+Plato:fish123

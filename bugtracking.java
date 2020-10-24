@@ -7,7 +7,8 @@ public class BugTracking extends UserLoginUI{
         //UserInformation infoOne = new UserInformation();
         //infoOne.displayInner();
         //infoOne.fileIO();
-        launch(args);
-        
+        UserLoginUI ui = new UserLoginUI();
+        ui.launch(args); // Starts UserLoginUI
+        //System.out.println("Hello World");
     }
 }
