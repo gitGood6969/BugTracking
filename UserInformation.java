@@ -18,7 +18,7 @@ public class UserInformation {
     private String userName; 
     private String userPassword;
     private boolean passwordMatched; 
-    private ArrayList<User> UserList = new ArrayList<User>();
+    //private ArrayList<User> UserList = new ArrayList<User>();
     
     // Default Constructor
     public UserInformation() 
@@ -53,8 +53,8 @@ public class UserInformation {
     public void setPasswordMatched(boolean passwordMatched) {this.passwordMatched = passwordMatched;}
     
     // Auxiliary Methods
-    public void fileIO() 
-    {
+    public boolean LoginStatus(String userName, String userPassword)
+    { // Read and Validate user login details. 
         try 
         { // Read from database.txt file containing login credentials
             String fileName = "database.txt"; // File with login credentials
@@ -67,7 +67,9 @@ public class UserInformation {
                 {
                     String data = fileReader.nextLine();
                     String[] tempArray = data.split(":"); // To Delimit the Username and Password
-                    UserList.add(new User(tempArray[0],tempArray[1]));
+                    //UserList.add(new User(tempArray[0],tempArray[1]));
+                    if (tempArray[0].toLowerCase().equals(userName.toLowerCase()) && tempArray[1].equals(userPassword))
+                    {setPasswordMatched(true);} // Return true if username and password matches
                 }
                 fileReader.close();
             }
@@ -79,58 +81,9 @@ public class UserInformation {
             }
         } 
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
-    }
-     
-    public boolean LoginStatus(String userName, String userPassword) // Joseph
-    {// This method does the Authentication. // May want to move this to Controller class
-        fileIO(); // Calls fileIO method to setup the arraylist of login credentials
-        for(User u: UserList)
-        {
-            if (u.getUserName().toLowerCase().equals(userName.toLowerCase()) && u.getUserPassword().equals(userPassword))
-            {setPasswordMatched(true);} // Return true if username and password matches
-        }
         return getPasswordMatched();
     }
 }
-
-// This class below is used when generating an ArrayList of "Users" and populate
-// each "user" object with the read from file "Username" and "Password"
-class User {
-    // private variables used to hold each user's login details read from database.txt
-    private String userName;
-    private String userPassword;
-    
-    // Default Constructor
-    User() 
-    {
-        setUserName("");
-        setUserPassword("");
-    } 
-        
-    // Main Constructor 
-    User(String userName, String userPassword) 
-    {
-        setUserName(userName); 
-        setUserPassword(userPassword);
-    }
-    
-    // Copy Constructor (Deep Copy) 
-    User(User temp)
-    {
-        setUserName(temp.getUserName()); 
-        setUserPassword(temp.getUserPassword());
-    }
-
-    // Accessor Methods
-    String getUserName()     {return userName;}
-    String getUserPassword() {return userPassword;}
-
-    // Mutator Methods
-    void setUserName(String userName)         {this.userName = userName;}
-    void setUserPassword(String userPassword) {this.userPassword = userPassword;} 
-}
-
-
 /*
 Websites used:
 https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html
