@@ -12,16 +12,15 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UserInformation {
+public class User {
 
     // Private Variables
     private String userName; 
     private String userPassword;
     private boolean passwordMatched; 
-    //private ArrayList<User> UserList = new ArrayList<User>();
     
     // Default Constructor
-    public UserInformation() 
+    public User() 
     {// Calls Mutators
         setUserName("");
         setUserPassword("");
@@ -29,7 +28,7 @@ public class UserInformation {
     }
 
     // Main Constructor
-    public UserInformation(String userName, String userPassword, boolean passwordMatched) 
+    public User(String userName, String userPassword, boolean passwordMatched) 
     {// Calls Mutators
         setUserName(userName);
         setUserPassword(userPassword);
@@ -37,7 +36,7 @@ public class UserInformation {
     }
 
     // Copy Constructor (Deep Copy)
-    public UserInformation (UserInformation temp)
+    public User (User temp)
     {// Calls Default Constructor
         this(temp.getUserName(),temp.getUserPassword(), temp.getPasswordMatched());
     }
