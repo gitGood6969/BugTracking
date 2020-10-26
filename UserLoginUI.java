@@ -1,6 +1,6 @@
 // This is the Boundary Class
 // Package
-package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 import javafx.application.Application; 
@@ -22,7 +22,7 @@ public class UserLoginUI extends Application
 {    
     Scene scene1; // Used for User Login 
     Scene scene2; // Used for Successful login
-    
+    int clearance = 0; // Used to contain the user's clearance level
     @Override
     public void start(Stage primaryStage) 
     {
@@ -56,6 +56,8 @@ public class UserLoginUI extends Application
             	{
                     primaryStage.setScene(scene2); // Loads Scene 2, Successful login screen
                     System.out.println("User has logged in!"); // Prints to command line
+                    clearance = loginController.getClearance(usernameTextField.getText(), passwordTextField.getText());
+                    changeScene(clearance); 
             	}
             	else
             	{
@@ -103,6 +105,31 @@ public class UserLoginUI extends Application
         //========================================================================
         primaryStage.setScene(scene1); // Sets the login page to appear
         primaryStage.show(); // Displays the page to appear
+    }
+
+    public static void changeScene(int clearance)
+    {
+        // Decision making code here to display corresponding scene according to clearance level 
+        if (clearance == 1)
+        {// Call the Reporter page UI here
+            System.out.println("Display Reporters page");
+        }
+        else if (clearance == 2)
+        {// Call the Developer page UI here
+            System.out.println("Display Developer page");
+        }
+        else if (clearance == 3)
+        {// Call the Reviewer page UI here
+            System.out.println("Display Reviewer page");
+        }
+        else if (clearance == 4)
+        {// Call the Triager page UI here
+            System.out.println("Display Triager page");
+        }
+        else
+        { // Display error message here!
+            System.out.println("Illegal clearance! Please re-loggin and try again!");
+        }
     }
 }  
 

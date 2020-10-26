@@ -1,6 +1,6 @@
 // This is the Controller Class
 // Package
-package BugTracking;
+//package BugTracking;
 
 public class UserLoginController {
 
@@ -13,4 +13,10 @@ public class UserLoginController {
         User tempUser = new User(); // Create Entity class User 
         return tempUser.LoginStatus(userName, userPassword);
     }
+    
+    public int getClearance(String userName, String userPassword)   
+    {
+        User tempUser = new User(); // Create Entity class User 
+        return tempUser.getClearanceLevel(userName, userPassword);
+    } 
 }
