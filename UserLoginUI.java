@@ -2,10 +2,11 @@
 // Package
 //package BugTracking;
 
-// Import Libraries
 import javafx.application.Application; 
 import javafx.event.ActionEvent; 
-import javafx.event.EventHandler; 
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene; 
 import javafx.scene.control.Button; 
 import javafx.scene.control.Label; 
@@ -14,8 +15,16 @@ import static javafx.application.Application.launch;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.scene.control.PasswordField;
 
 public class UserLoginUI extends Application 
@@ -23,6 +32,7 @@ public class UserLoginUI extends Application
     Scene scene1; // Used for User Login 
     Scene scene2; // Used for Successful login
     int clearance = 0; // Used to contain the user's clearance level
+
     @Override
     public void start(Stage primaryStage) 
     {
@@ -30,6 +40,16 @@ public class UserLoginUI extends Application
         // Scene 1 (User Login Screen)
         //========================================================================
         primaryStage.setTitle("UserLoginUI"); // Name of Page
+        
+        GridPane grid = new GridPane();
+    	grid.setAlignment(Pos.CENTER);
+    	grid.setHgap(30);
+    	grid.setVgap(10);
+    	grid.setPadding(new Insets(25, 25, 25, 25));
+    	
+    	BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        grid.setBackground(background);
 
         Label labelUsername = new Label("Username:"); // Username Box
         TextField usernameTextField = new TextField ();
@@ -43,6 +63,11 @@ public class UserLoginUI extends Application
         alert.setTitle("Warning Dialog");
         alert.setHeaderText("Invalid Authentication!");
         alert.setContentText("Wrong Username or Password.");
+        
+        Alert alert2 = new Alert(AlertType.ERROR); // Joseph
+        alert2.setTitle("Error Dialog");
+        alert2.setHeaderText("Empty Field Detected");
+        alert2.setContentText("Username and Password are required!");
 
         Button btn1 = new Button(); // Login Button
         btn1.setText("Login");
@@ -51,34 +76,48 @@ public class UserLoginUI extends Application
             @Override
             public void handle(ActionEvent event)  // Joseph
             {// Initializes the Controller Class UserLoginController
-            	UserLoginController loginController = new UserLoginController(); 
-            	if(loginController.ValidateUser(usernameTextField.getText(), passwordTextField.getText()) == true)
+            	UserLoginController loginController = new UserLoginController();
+                // Check for empty text fields
+            	if(usernameTextField.getText() == null || usernameTextField.getText().trim().isEmpty() 
+                    || passwordTextField.getText() == null || passwordTextField.getText().trim().isEmpty())
             	{
-                    primaryStage.setScene(scene2); // Loads Scene 2, Successful login screen
-                    System.out.println("User has logged in!"); // Prints to command line
-                    clearance = loginController.getClearance(usernameTextField.getText(), passwordTextField.getText());
-                    changeScene(clearance); 
-            	}
+                    alert2.showAndWait();
+	        }
             	else
             	{
-                   alert.showAndWait();
+            		if(loginController.ValidateUser(usernameTextField.getText(), passwordTextField.getText()) == true)
+	            	{
+	                    primaryStage.setScene(scene2); // Loads Scene 2, Successful login screen
+	                    System.out.println("User has logged in!"); // Prints to command line
+	                    clearance = loginController.getClearance(usernameTextField.getText(), passwordTextField.getText());
+	                    changeScene(clearance); 
+	            	}
+	            	else
+	            	{
+	                   alert.showAndWait();
+	            	}
+	                usernameTextField.clear(); // Clears Username Box
+	                passwordTextField.clear(); // Clears Password Box
             	}
-                usernameTextField.clear(); // Clears Username Box
-                passwordTextField.clear(); // Clears Password Box
-            }	
+            }
         });
   
-        HBox hbUsername = new HBox(); // Combine components for Username Field
-        hbUsername.getChildren().addAll(labelUsername, usernameTextField);
-        hbUsername.setSpacing(10);
-
-        HBox hbPassword = new HBox(); // Combine components for password Field
-        hbPassword.getChildren().addAll(labelPassword, passwordTextField);
-        hbPassword.setSpacing(10);
+        Text scenetitle = new Text("Login Page");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        grid.add(scenetitle, 0, 0, 2, 1);
         
-        VBox layout1 = new VBox(20);  // Combining all Elements to a single screen  
-        layout1.getChildren().addAll(hbUsername, hbPassword, btn1);
-        scene1= new Scene(layout1, 300, 250);
+        grid.add(labelUsername, 0, 1);
+        grid.add(usernameTextField, 1, 1);
+        
+        grid.add(labelPassword, 0, 2);
+        grid.add(passwordTextField, 1, 2);
+        
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(btn1);
+        grid.add(hbBtn, 1, 4);
+        
+        scene1 = new Scene(grid, 350, 300);
 
         //========================================================================
         // Scene2 (Logout Screen which shows after user has been authenticated)
@@ -131,7 +170,7 @@ public class UserLoginUI extends Application
             System.out.println("Illegal clearance! Please re-loggin and try again!");
         }
     }
-}  
+} 
 
 /* Websites used:
 http://www.learningaboutelectronics.com/Articles/How-to-create-multiple-scenes-and-switch-between-scenes-in-JavaFX.php
