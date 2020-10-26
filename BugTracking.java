@@ -1,6 +1,6 @@
 // This is the Driver Class
 // Package
-//package BugTracking;
+package BugTracking;
 
 // import libraries
 import javafx.application.Application; 

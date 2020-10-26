@@ -1,6 +1,6 @@
 // This is the Entity Class
 // Package
-//package BugTracking;
+package BugTracking;
 
 // Import Libraries
 import java.io.File;

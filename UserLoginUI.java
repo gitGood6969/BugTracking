@@ -1,6 +1,6 @@
 // This is the Boundary Class
 // Package
-//package BugTracking;
+package BugTracking;
 
 // import libraries
 import javafx.event.ActionEvent; 
@@ -81,7 +81,7 @@ public class UserLoginUI
 	                //System.out.println("User has logged in!"); // Prints to command line
                         int clearance = loginController.getClearance(usernameTextField.getText(), passwordTextField.getText());
                         if (clearance == 1)
-                        {stage.setScene(BugReportPageUI.create(stage));} // Call the Reporter page UI here
+                        {stage.setScene(ReporterHomePage.create(stage));} // Call the Reporter page UI here
                         else if (clearance == 2)
                         {System.out.println("Display Developer page");}  // Call the Developer page UI here
                         else if (clearance == 3)

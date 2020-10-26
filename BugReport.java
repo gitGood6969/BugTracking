@@ -1,5 +1,5 @@
 // Package
-//package BugTracking;
+package BugTracking;
 
 // Entity Class
 public class BugReport 
