@@ -1,5 +1,7 @@
 //package
-package BugTracking;
+//package BugTracking;
+
+// This class is the reporter's main menu after they login successfully
 
 // Import libraries
 import java.util.Date;

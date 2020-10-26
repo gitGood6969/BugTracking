@@ -1,6 +1,6 @@
 // This is the Controller Class
 // Package
-package BugTracking;
+//package BugTracking;
 
 public class UserLoginController {
 
