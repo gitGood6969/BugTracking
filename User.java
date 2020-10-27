@@ -9,8 +9,13 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;  
 import java.util.Scanner; 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class User 
 {
@@ -48,9 +53,9 @@ public class User
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
         return match;
     }
-    public int getClearanceLevel(String userName, String userPassword)
+    public int getRole(String userName, String userPassword)
     {// Read and Validate user login details after that, return the user's clearance level. 
-        int clearanceLevel = 0;
+        int role = 0;
         try 
         { // Read from database.txt file containing login credentials
             String fileName = "database.txt"; // File with login credentials
@@ -64,7 +69,7 @@ public class User
                     String data = fileReader.nextLine();
                     String[] tempArray = data.split(":"); // To Delimit the Username and Password
                     if (tempArray[0].toLowerCase().equals(userName.toLowerCase()) && tempArray[1].equals(userPassword))
-                    {clearanceLevel = Integer.parseInt(tempArray[2]);} // Return clearance level 
+                    {role = Integer.parseInt(tempArray[2]);} // Return clearance level 
                 }
                 fileReader.close();
             }
@@ -76,7 +81,7 @@ public class User
             }
         } 
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
-        return clearanceLevel;
+        return role;
     }
 }
 /*

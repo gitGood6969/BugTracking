@@ -17,6 +17,6 @@ public class UserLoginController {
     public int getClearance(String userName, String userPassword)   
     {
         User tempUser = new User(); // Create Entity class User 
-        return tempUser.getClearanceLevel(userName, userPassword);
+        return tempUser.getRole(userName, userPassword);
     } 
 }

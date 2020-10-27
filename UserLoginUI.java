@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene; 
 import javafx.scene.control.Button; 
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label; 
 import javafx.stage.Stage; 
 import javafx.scene.control.TextField;
@@ -81,7 +82,10 @@ public class UserLoginUI
 	                //System.out.println("User has logged in!"); // Prints to command line
                         int clearance = loginController.getClearance(usernameTextField.getText(), passwordTextField.getText());
                         if (clearance == 1)
-                        {stage.setScene(ReporterHomePage.create(stage));} // Call the Reporter page UI here
+                        {// Call the Reporter page UI here
+                            //stage.setScene(ReporterHomePage.create(stage));
+                            stage.setScene(ReporterPage(stage));
+                        } 
                         else if (clearance == 2)
                         {System.out.println("Display Developer page");}  // Call the Developer page UI here
                         else if (clearance == 3)
@@ -118,6 +122,73 @@ public class UserLoginUI
         Scene scene1 = new Scene(grid, 350, 300); // Adjust screen size
         return scene1; 
     }
+
+    public static Scene ReporterPage (Stage stage) 
+    { 
+        Label label2 = new Label("This is the second scene"); // On-Screen text
+
+        VBox vbox = new VBox();
+        vbox.setPadding(new Insets(2));
+        vbox.setSpacing(1);
+
+        Text title = new Text("Reporter's Task");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        vbox.getChildren().add(title);
+
+        Hyperlink options[] = new Hyperlink[] 
+        {
+            new Hyperlink("Report Bug"),
+            new Hyperlink("Generate Bug Report")
+            //any more you can add in 
+        };
+
+        // i<2 (the number 2 will change if more hyperlinks is added to options[])
+        for (int i=0; i<2; i++) 
+        {
+            vbox.setMargin(options[i], new Insets(0, 0, 0, 8));
+            vbox.getChildren().add(options[i]);
+
+            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Report Bug") 
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                        stage.setScene(BugReportPageUI.create(stage));
+                        System.out.println("Next Page");   
+                    }
+
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Generate Bug Report") 
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>()
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                            //transition to the next UI page for generating the report! 
+                    }
+                });
+            }
+        }
+
+        Button logoutBtn = new Button("Logout"); // Logout Button
+        logoutBtn.setOnAction(new EventHandler<ActionEvent>() 
+        {// Handles what actions happend when the button is clicked.  
+            @Override
+            public void handle(ActionEvent event) 
+            {
+                stage.setScene(UserLoginUI.create(stage));
+                System.out.println("User has logged out!");
+            }
+        });
+        VBox layout2 = new VBox(20);  // Combining all Elements to a single screen    
+        layout2.getChildren().addAll(label2, vbox, logoutBtn);
+        Scene scene2= new Scene(layout2, 300, 250);
+        return scene2;
+    } 
 }
 
 /* Websites used:
