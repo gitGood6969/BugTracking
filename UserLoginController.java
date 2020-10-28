@@ -14,9 +14,9 @@ public class UserLoginController {
         return tempUser.LoginStatus(userName, userPassword);
     }
     
-    public int getClearance(String userName, String userPassword)   
+    public int[] getUser(String userName, String userPassword)   
     {
         User tempUser = new User(); // Create Entity class User 
-        return tempUser.getRole(userName, userPassword);
+        return tempUser.getID(userName, userPassword);
     } 
 }

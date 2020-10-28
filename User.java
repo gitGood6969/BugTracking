@@ -4,18 +4,8 @@
 
 // Import Libraries
 import java.io.File;
-import java.io.FileWriter; 
-import java.io.IOException;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;  
 import java.util.Scanner; 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class User 
 {
@@ -53,9 +43,10 @@ public class User
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
         return match;
     }
-    public int getRole(String userName, String userPassword)
+
+    public int[] getID(String userName, String userPassword)
     {// Read and Validate user login details after that, return the user's clearance level. 
-        int role = 0;
+        int[] userID = new int[2];
         try 
         { // Read from database.txt file containing login credentials
             String fileName = "database.txt"; // File with login credentials
@@ -69,7 +60,10 @@ public class User
                     String data = fileReader.nextLine();
                     String[] tempArray = data.split(":"); // To Delimit the Username and Password
                     if (tempArray[0].toLowerCase().equals(userName.toLowerCase()) && tempArray[1].equals(userPassword))
-                    {role = Integer.parseInt(tempArray[2]);} // Return clearance level 
+                    {// Return clearance level 
+                        userID[0] = Integer.parseInt(tempArray[2]);
+                    	userID[1] = Integer.parseInt(tempArray[3]);
+                    }
                 }
                 fileReader.close();
             }
@@ -81,9 +75,10 @@ public class User
             }
         } 
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
-        return role;
+        return userID;
     }
 }
+
 /*
 Websites used:
 https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html

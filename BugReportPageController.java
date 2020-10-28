@@ -4,11 +4,13 @@
 // Controller class
 public class BugReportPageController 
 {
-    // Private Variables
-    //BugID;
-    //BugStatus; 
-    //BugDescription;
+    // Default Constructor
+    public BugReportPageController(){}
 
-    // Auxiliary Methods
-    //CreateBugReport(BugID, BugStatus, BugDescription);
+    // Auxiliary Method
+    public boolean CreateBugReport(String bugName, String bugDescription)
+    {
+        BugList buglist = new BugList();
+        return buglist.InsertBugReport(bugName, bugDescription);
+    }     
 }
