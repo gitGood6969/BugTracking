@@ -18,7 +18,7 @@ public class User
         boolean match = false;
         try 
         { // Read from database.txt file containing login credentials
-            String fileName = "database.txt"; // File with login credentials
+            String fileName = "userlist.txt"; // File with login credentials
             File myFile = new File(fileName); 
 
             if (myFile.exists() && !myFile.isDirectory()) // Check if File exists 
@@ -49,7 +49,7 @@ public class User
         int[] userID = new int[2];
         try 
         { // Read from database.txt file containing login credentials
-            String fileName = "database.txt"; // File with login credentials
+            String fileName = "userlist.txt"; // File with login credentials
             File myFile = new File(fileName); 
 
             if (myFile.exists() && !myFile.isDirectory()) // Check if File exists 
