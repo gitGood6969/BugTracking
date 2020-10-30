@@ -1,8 +1,5 @@
-// This is the Driver Class
-// Package
 //package BugTracking;
 
-// import libraries
 import javafx.application.Application; 
 import javafx.stage.Stage; 
 
@@ -17,3 +14,5 @@ public class BugTracking extends Application
     public static void main(String[] args)
     {Application.launch(args);}
 }
+
+

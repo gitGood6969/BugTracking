@@ -1,5 +1,3 @@
-// This is the Controller Class
-// Package
 //package BugTracking;
 
 public class UserLoginController {
@@ -19,4 +17,5 @@ public class UserLoginController {
         User tempUser = new User(); // Create Entity class User 
         return tempUser.getID(userName, userPassword);
     } 
+    
 }

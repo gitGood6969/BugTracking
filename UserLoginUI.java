@@ -1,5 +1,3 @@
-// This is the Boundary Class
-// Package
 //package BugTracking;
 
 // import libraries
@@ -264,7 +262,7 @@ public class UserLoginUI
                     @Override
                     public void handle(ActionEvent t) 
                     {
-                        stage.setScene(DeveloperBugListUI.create(stage, uID)); 
+                        stage.setScene(DeveloperBugListUI.create(stage)); 
                     }
                 });
             }
@@ -349,14 +347,14 @@ public class UserLoginUI
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
 
-            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Report Bug") 
+            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "View list of Bugs") 
             {
                 options[i].setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
                     public void handle(ActionEvent t) 
                     {
-                        //stage.setScene(ReviewerBugListUI.create(stage)); 
+                       stage.setScene(ReviewerBugListUI.create(stage)); 
                     }
                 });
             }
@@ -419,14 +417,14 @@ public class UserLoginUI
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
 
-            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Report Bug")
+            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "View list of Bugs")
             {
                 options[i].setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
                     public void handle(ActionEvent t) 
                     {
-                        //stage.setScene(TraigerBugListUI.create(stage)); 
+                        stage.setScene(TriagerBugListUI.create(stage)); 
                     }
                 });
             }

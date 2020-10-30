@@ -1,11 +1,8 @@
-// This is the Entity Class
-// Package
 //package BugTracking;
 
-// Import Libraries
 import java.io.File;
 import java.io.FileNotFoundException;  
-import java.util.Scanner; 
+import java.util.Scanner;
 
 public class User 
 {
@@ -18,7 +15,7 @@ public class User
         boolean match = false;
         try 
         { // Read from database.txt file containing login credentials
-            String fileName = "userlist.txt"; // File with login credentials
+            String fileName = "database.txt"; // File with login credentials
             File myFile = new File(fileName); 
 
             if (myFile.exists() && !myFile.isDirectory()) // Check if File exists 
@@ -43,13 +40,12 @@ public class User
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
         return match;
     }
-
     public int[] getID(String userName, String userPassword)
     {// Read and Validate user login details after that, return the user's clearance level. 
         int[] userID = new int[2];
         try 
         { // Read from database.txt file containing login credentials
-            String fileName = "userlist.txt"; // File with login credentials
+            String fileName = "database.txt"; // File with login credentials
             File myFile = new File(fileName); 
 
             if (myFile.exists() && !myFile.isDirectory()) // Check if File exists 
@@ -60,10 +56,10 @@ public class User
                     String data = fileReader.nextLine();
                     String[] tempArray = data.split(":"); // To Delimit the Username and Password
                     if (tempArray[0].toLowerCase().equals(userName.toLowerCase()) && tempArray[1].equals(userPassword))
-                    {// Return clearance level 
-                        userID[0] = Integer.parseInt(tempArray[2]);
+                    {
+                    	userID[0] = Integer.parseInt(tempArray[2]);
                     	userID[1] = Integer.parseInt(tempArray[3]);
-                    }
+                    } // Return clearance level 
                 }
                 fileReader.close();
             }
@@ -78,18 +74,3 @@ public class User
         return userID;
     }
 }
-
-/*
-Websites used:
-https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html
-https://www.baeldung.com/java-deep-copy
-https://www.geeksforgeeks.org/file-class-in-java/
-https://www.w3schools.com/java/java_files_create.asp
-https://stackoverflow.com/questions/46683251/how-do-i-write-to-a-new-line-using-filewriter-in-java/46683451
-https://www.tutorialspoint.com/java/java_innerclasses.htm#:~:text=In%20Java%2C%20just%20like%20methods,is%20called%20the%20outer%20class.&text=Following%20is%20the%20syntax%20to%20write%20a%20nested%20class.
-https://www.w3schools.com/java/java_files_read.asp
-https://stackoverflow.com/questions/1816673/how-do-i-check-if-a-file-exists-in-java
-https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
-https://javarevisited.blogspot.com/2017/01/how-to-split-string-based-on-delimiter-in-java.html
-https://www.w3schools.com/java/java_arraylist.asp
-*/

@@ -1,16 +1,11 @@
-// Package
 //package BugTracking;
 
-// Controller class
-public class BugReportPageController 
-{
-    // Default Constructor
-    public BugReportPageController(){}
+public class BugReportPageController {
+	
+	public boolean CreateBugReport(String bugName, String bugDescription)
+	{
+		BugList buglist = new BugList();
+		return buglist.InsertBugReport(bugName, bugDescription);
+	}
 
-    // Auxiliary Method
-    public boolean CreateBugReport(String bugName, String bugDescription)
-    {
-        BugList buglist = new BugList();
-        return buglist.InsertBugReport(bugName, bugDescription);
-    }     
 }

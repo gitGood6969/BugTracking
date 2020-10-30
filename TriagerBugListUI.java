@@ -15,9 +15,9 @@ import javafx.scene.control.Button;        // To use Button
 import javafx.event.EventHandler;          // To use Event Handler
 import javafx.event.ActionEvent;           // To use Action Event
 
-public class DeveloperBugListUI
+public class TriagerBugListUI
 {
-    public DeveloperBugListUI() {} // Default constructor
+    public TriagerBugListUI() {} // Default constructor
     
     public static Scene create (Stage stage)
     {
@@ -29,32 +29,46 @@ public class DeveloperBugListUI
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text bugListLabel = new Text("Bug List assigned to me"); // Create a text label/header
-        TextArea list = new TextArea(); // Create list to hold "list of bugs"
+        Text bugListLabel1 = new Text("Bug Unassigned"); // Create a text label/header
+        TextArea listUnassigned = new TextArea(); // Create list to hold "list of bugs"
         
-        DeveloperBugListController ctrl = new DeveloperBugListController();
-        String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(UserLoginUI.uID));
+        TriagerBugListController ctrl = new TriagerBugListController();
+        String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(0));
         for(int i = 0; i < strArray.length; i++)
 		{
 			if(i==0)
-				list.appendText(strArray[i]);
+				listUnassigned.appendText(strArray[i]);
 			else
-				list.appendText("\n" + strArray[i]);
-		}
+				listUnassigned.appendText("\n" + strArray[i]);
+		}        
+        listUnassigned.setEditable(false); // Don't allow users to edit the list
         
-        list.setEditable(false); // Don't allow users to edit the list
+        Text bugListLabel2 = new Text("Bug Assigned"); // Create a text label/header
+        TextArea listAssigned = new TextArea(); // Create list to hold "list of bugs"
+        
+        String[] strArray2 = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(1));
+        for(int i = 0; i < strArray2.length; i++)
+		{
+			if(i==0)
+				listAssigned.appendText(strArray2[i]);
+			else
+				listAssigned.appendText("\n" + strArray2[i]);
+		}        
+        listAssigned.setEditable(false); // Don't allow users to edit the list
 
         Button buttonBack = new Button("Back");  // "back" button to go back the Developer homepage
         buttonBack.setOnAction(new EventHandler<ActionEvent>() 
         {// Handles what actions happened when the button is clicked.   
             @Override
             public void handle(ActionEvent event) 
-            {stage.setScene(UserLoginUI.DeveloperPage(stage));}
+            {stage.setScene(UserLoginUI.TriagerPage(stage));}
         });
 
-        grid.add(bugListLabel, 0, 0); // Adding label to grid
-        grid.add(list, 0, 1);         // Adding list to grid
-        grid.add(buttonBack, 0, 3);   // Adding the "back" button to grid 
+        grid.add(bugListLabel1, 0, 0); // Adding label to grid
+        grid.add(listUnassigned, 0, 1); 
+        grid.add(bugListLabel2, 0, 2);
+        grid.add(listAssigned, 0, 3);// Adding list to grid
+        grid.add(buttonBack, 0, 4);   // Adding the "back" button to grid 
 
         // Change the color of the background
         BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
@@ -62,7 +76,7 @@ public class DeveloperBugListUI
         grid.setBackground(background);    // Adding Background to Grid
 
         scene = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
-        stage.setTitle("Developer Bug List");
+        stage.setTitle("Triager Bug List");
         stage.setScene(scene);
         stage.show();
         return scene; 
