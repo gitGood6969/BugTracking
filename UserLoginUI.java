@@ -239,7 +239,7 @@ public class UserLoginUI
         vbox.setPadding(new Insets(25, 25, 25, 25));
         vbox.setSpacing(10);
 
-        Text title = new Text("Reporter's Task");
+        Text title = new Text("Developer's Task");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         vbox.getChildren().add(title);
 
@@ -257,14 +257,37 @@ public class UserLoginUI
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
 
-            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Report Bug") 
+            if (options[i].onMouseClickedProperty() != null && options[i].getText() == "View Bugs Assigned") 
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                { // STOPPED HERE! 29/10/2020 10:23PM ##################################################################################
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                        stage.setScene(DeveloperBugListUI.create(stage, uID)); 
+                    }
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Update Bug Status")
             {
                 options[i].setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
                     public void handle(ActionEvent t) 
                     {
-                        //stage.setScene(DeveloperBugListUI.create(stage)); 
+                        //stage.setScene(ReporterBugListUI.create(stage));
+                        System.out.println("Update Bug Status");
+                    }    
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Search Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                        System.out.println("Search Bugs");
                     }
                 });
             }
