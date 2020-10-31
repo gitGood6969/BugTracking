@@ -40,12 +40,15 @@ DeveloperBugListUI
 ReporterBugListUI
 UserLoginUI
 DeveloperBugListUI
+TriagerBugListUI           
 
 Controller Class:
 BugReportPageController
 ReporterBugListController
 UserLoginController
 DeveloperBugListController
+TriagerBugListController   
+ReviwewerBugListController 
 
 Entity Class:
 BugList
@@ -74,15 +77,14 @@ DeveloperBugListController [Controller]
 BugList                    [Entity]
 
 #54 As a Reviewer, I want to view the list of bugs to check that if it is being fixed or not
-ReviewerBugListUI         [Boundary]
+ReviewerBugListUI          [Boundary]
 ReviwewerBugListController [Controller]
 BugList                    [Entity]
 
 #55 As a Triager, I want to view the list of bugs so that I will know whether it has been assigned to any developers
-ReviewerBugListUI         [Boundary]
-ReviwewerBugListController [Controller]
+TriagerBugListUI           [Boundary]
+TriagerBugListController   [Controller]
 BugList                    [Entity]
-
 //==============================================
 
 

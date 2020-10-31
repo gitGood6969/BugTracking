@@ -35,12 +35,12 @@ public class DeveloperBugListUI
         DeveloperBugListController ctrl = new DeveloperBugListController();
         String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(UserLoginUI.uID));
         for(int i = 0; i < strArray.length; i++)
-		{
-			if(i==0)
-				list.appendText(strArray[i]);
-			else
-				list.appendText("\n" + strArray[i]);
-		}
+        {
+            if(i==0)
+            {list.appendText(strArray[i]);}
+            else
+            {list.appendText("\n" + strArray[i]);}
+        }
         
         list.setEditable(false); // Don't allow users to edit the list
 

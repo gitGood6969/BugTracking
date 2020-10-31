@@ -1,5 +1,8 @@
+// Boundary Class
+// Package
 //package BugTracking;
 
+// Import Libraries
 import javafx.scene.Scene;                 // To use Scene 
 import javafx.stage.Stage;                 // To use Stage 
 import javafx.scene.layout.GridPane;       // To use Grid 
@@ -35,12 +38,12 @@ public class TriagerBugListUI
         TriagerBugListController ctrl = new TriagerBugListController();
         String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(0));
         for(int i = 0; i < strArray.length; i++)
-		{
-			if(i==0)
-				listUnassigned.appendText(strArray[i]);
-			else
-				listUnassigned.appendText("\n" + strArray[i]);
-		}        
+        {
+            if(i==0)
+            {listUnassigned.appendText(strArray[i]);}
+            else
+            {listUnassigned.appendText("\n" + strArray[i]);}
+        }        
         listUnassigned.setEditable(false); // Don't allow users to edit the list
         
         Text bugListLabel2 = new Text("Bug Assigned"); // Create a text label/header
@@ -48,12 +51,12 @@ public class TriagerBugListUI
         
         String[] strArray2 = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(1));
         for(int i = 0; i < strArray2.length; i++)
-		{
-			if(i==0)
-				listAssigned.appendText(strArray2[i]);
-			else
-				listAssigned.appendText("\n" + strArray2[i]);
-		}        
+        {
+            if(i==0)
+            {listAssigned.appendText(strArray2[i]);}
+            else
+            {listAssigned.appendText("\n" + strArray2[i]);}
+        }        
         listAssigned.setEditable(false); // Don't allow users to edit the list
 
         Button buttonBack = new Button("Back");  // "back" button to go back the Developer homepage

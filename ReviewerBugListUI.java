@@ -1,5 +1,8 @@
+// Boundary Class
+// Package
 //package BugTracking;
 
+// Import Libraries
 import javafx.scene.Scene;                 // To use Scene 
 import javafx.stage.Stage;                 // To use Stage 
 import javafx.scene.layout.GridPane;       // To use Grid 

@@ -1,5 +1,8 @@
+// Entity Class
+// Package
 //package BugTracking;
 
+// Import Libraries
 import java.io.File;
 import java.io.FileNotFoundException;  
 import java.util.Scanner;

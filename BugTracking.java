@@ -1,5 +1,8 @@
+// Driver Class
+// Package
 //package BugTracking;
 
+// Import Libraries
 import javafx.application.Application; 
 import javafx.stage.Stage; 
 

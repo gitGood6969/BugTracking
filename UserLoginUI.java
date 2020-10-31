@@ -1,3 +1,5 @@
+// Boundary Class
+// Package
 //package BugTracking;
 
 // import libraries
@@ -258,7 +260,7 @@ public class UserLoginUI
             if (options[i].onMouseClickedProperty() != null && options[i].getText() == "View Bugs Assigned") 
             {
                 options[i].setOnAction(new EventHandler<ActionEvent>() 
-                { // STOPPED HERE! 29/10/2020 10:23PM ##################################################################################
+                {
                     @Override
                     public void handle(ActionEvent t) 
                     {
