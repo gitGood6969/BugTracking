@@ -1,5 +1,8 @@
+// Boundary Class
+// Package
 //package BugTracking;
 
+// Import Libraries
 import javafx.scene.Scene;                 // To use Scene 
 import javafx.stage.Stage;                 // To use Stage 
 import javafx.scene.layout.GridPane;       // To use Grid 
@@ -33,7 +36,7 @@ public class DeveloperBugListUI
         TextArea list = new TextArea(); // Create list to hold "list of bugs"
         
         DeveloperBugListController ctrl = new DeveloperBugListController();
-        String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(UserLoginUI.uID));
+        String[] strArray = getListOfBugs(ctrl);
         for(int i = 0; i < strArray.length; i++)
         {
             if(i==0)
@@ -66,5 +69,13 @@ public class DeveloperBugListUI
         stage.setScene(scene);
         stage.show();
         return scene; 
+    }
+
+    public static String[] getListOfBugs(DeveloperBugListController ctrl)
+    {
+        String role = Integer.toString(UserLoginUI.userRole);
+        String id = Integer.toString(UserLoginUI.uID);
+        String[] strArray = ctrl.ViewListOfBugs(role, id);
+        return strArray;
     }
 }

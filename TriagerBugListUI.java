@@ -36,7 +36,8 @@ public class TriagerBugListUI
         TextArea listUnassigned = new TextArea(); // Create list to hold "list of bugs"
         
         TriagerBugListController ctrl = new TriagerBugListController();
-        String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(0));
+        //String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(0));
+        String[] strArray = getListOfBugs(ctrl, 0);
         for(int i = 0; i < strArray.length; i++)
         {
             if(i==0)
@@ -49,7 +50,8 @@ public class TriagerBugListUI
         Text bugListLabel2 = new Text("Bug Assigned"); // Create a text label/header
         TextArea listAssigned = new TextArea(); // Create list to hold "list of bugs"
         
-        String[] strArray2 = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(1));
+        //String[] strArray2 = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(1));
+        String[] strArray2 = getListOfBugs(ctrl, 1);
         for(int i = 0; i < strArray2.length; i++)
         {
             if(i==0)
@@ -83,5 +85,13 @@ public class TriagerBugListUI
         stage.setScene(scene);
         stage.show();
         return scene; 
+    }
+    
+    public static String[] getListOfBugs(TriagerBugListController ctrl, int i)
+    {
+        String role = Integer.toString(UserLoginUI.userRole);
+        String num = Integer.toString(i);
+        String[] strArray = ctrl.ViewListOfBugs(role, num);
+        return strArray;
     }
 }

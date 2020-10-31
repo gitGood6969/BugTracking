@@ -4,9 +4,12 @@
 
 public class ReviewerBugListController
 {
+    private String[] strArray; // Private Variable
+    public ReviewerBugListController() {} // Default Constructor 
     public String[] ViewListOfBugs(String role, String num)
     {
         BugList bugList = new BugList();
-        return bugList.getListOfBugs(role, num);
+        strArray = bugList.getListOfBugs(role, num);
+        return strArray;
     }
 }

@@ -36,7 +36,8 @@ public class ReviewerBugListUI
         TextArea listFixed = new TextArea(); // Create list to hold "list of bugs"
         
         ReviewerBugListController ctrl = new ReviewerBugListController();
-        String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(1));
+        String[] strArray = getListOfBugs(ctrl, 1);
+        //String[] strArray = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(1));
         for(int i = 0; i < strArray.length; i++)
         {
             if(i==0)
@@ -49,14 +50,16 @@ public class ReviewerBugListUI
         Text bugListLabel2 = new Text("Bug Unfixed"); // Create a text label/header
         TextArea listUnfixed = new TextArea(); // Create list to hold "list of bugs"
         
-        String[] strArray2 = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(0));
+        String[] strArray2 = getListOfBugs(ctrl, 0);
+        //String[] strArray2 = ctrl.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(0));
+        // careful of the 0 here
         for(int i = 0; i < strArray2.length; i++)
-		{
-			if(i==0)
-				listUnfixed.appendText(strArray2[i]);
-			else
-				listUnfixed.appendText("\n" + strArray2[i]);
-		}        
+        {
+            if(i==0)
+            {listUnfixed.appendText(strArray2[i]);}
+            else
+            {listUnfixed.appendText("\n" + strArray2[i]);}
+        }        
         listUnfixed.setEditable(false); // Don't allow users to edit the list
 
         Button buttonBack = new Button("Back");  // "back" button to go back the Developer homepage
@@ -83,5 +86,13 @@ public class ReviewerBugListUI
         stage.setScene(scene);
         stage.show();
         return scene; 
+    }
+
+    public static String[] getListOfBugs(ReviewerBugListController ctrl, int i)
+    {
+        String role = Integer.toString(UserLoginUI.userRole);
+        String num = Integer.toString(i);
+        String[] strArray = ctrl.ViewListOfBugs(role, num);
+        return strArray;
     }
 }
