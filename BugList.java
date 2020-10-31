@@ -52,7 +52,7 @@ public class BugList
                     tempArrayList.add(bug);
                 }
                 else if(Integer.parseInt(role) == 3 && Integer.parseInt(num) == 1 && Integer.parseInt(tempArray[3]) == 1)
-                {
+                {// Checks Developer role, 
                     String bug = "BugName: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\n"; 
                     tempArrayList.add(bug);
                 }

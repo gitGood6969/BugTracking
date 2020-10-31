@@ -14,11 +14,10 @@ reporterRole :reporterID :assignedTo :fixed/unfixed :bugName   :bugDescription
 1            :2          :4          :1             :testing 3 :bug report 3
 1            :2          :0          :0             :testing 4 :bug report 4
 
-userlist.txt
+database.txt
 username :password :role :ID
 tom      :111      :1    :2
 bob      :222      :2    :4
-jane     :221      :2    :3
 alice    :333      :3    :6
 john     :444      :4    :8
 

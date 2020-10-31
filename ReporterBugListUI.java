@@ -33,10 +33,9 @@ public class ReporterBugListUI
         Text bugListLabel = new Text("Bug List");
         TextArea list = new TextArea();
 
-
         //Code to get data from controller here
         ReporterBugListController controller = new ReporterBugListController();
-        String[] strArray = controller.ViewListOfBugs(Integer.toString(UserLoginUI.userRole), Integer.toString(UserLoginUI.uID));
+        String[] strArray = getListOfBugs(controller);
         for(int i = 0; i < strArray.length; i++)
         {
             if(i==0)
@@ -71,5 +70,13 @@ public class ReporterBugListUI
         stage.setScene(scene);
         stage.show();
         return scene;
+    }    
+    
+    public static String[] getListOfBugs(ReporterBugListController controller)
+    {
+        String role = Integer.toString(UserLoginUI.userRole);
+        String id = Integer.toString(UserLoginUI.uID);
+        String[] strArray = controller.ViewListOfBugs(role, id);
+        return strArray;
     }
 }
