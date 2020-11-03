@@ -193,12 +193,12 @@ public class BugReportPageUI
 
         grid.add(descriptionBugArea, 1, 2); 		// Add detailsOfBug TextArea
 
-        grid.add(buttonBack, 0, 3);			 	// Add Back Button
+        grid.add(buttonBack, 0, 3);			// Add Back Button
 
         HBox submitBtn = new HBox(10);        
         submitBtn.setAlignment(Pos.BOTTOM_RIGHT);
         submitBtn.getChildren().add(buttonSubmit);
-        grid.add(submitBtn, 1, 3);           	// Add Submit Button
+        grid.add(submitBtn, 1, 3);                      // Add Submit Button
 
         //styling background of grid
         BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);

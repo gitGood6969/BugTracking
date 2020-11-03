@@ -8,11 +8,13 @@ java BugTracking
 //==============================================
 How to read the database files...
 BugList.txt:
-reporterRole :reporterID :assignedTo :fixed/unfixed :bugName   :bugDescription
-1            :2          :4          :1             :testing 1 :bug report 1
-1            :4          :2          :0             :testing 2 :bug report 2
-1            :2          :4          :1             :testing 3 :bug report 3
-1            :2          :0          :0             :testing 4 :bug report 4
+reporterRole :reporterID :assignedTo :status :bugName   :bugDescription
+1            :2          :4          :1      :testing 1 :bug report 1
+1            :2          :4          :0      :testing 2 :bug report 2
+1            :3          :4          :1      :testing 3 :bug report 3
+1            :3          :0          :0      :testing 4 :bug report 4 
+
+Status is either [(1)fixed/(0)unfixed]
 
 database.txt
 username :password :role :ID
