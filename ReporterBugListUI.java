@@ -1,6 +1,6 @@
 // Boundary Class
 // Package
-//package BugTracking;
+// package BugTracking;
 
 // Import Libraries
 import javafx.event.ActionEvent;

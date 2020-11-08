@@ -1,6 +1,8 @@
-// Boundary Class
+// Controller Class
+// [User Stories: #40 & many others...]
+    
 // Package
-//package BugTracking;
+// package BugTracking;
 
 // import libraries
 import javafx.event.ActionEvent; 
@@ -26,12 +28,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.control.PasswordField;
-import javafx.application.Application;
 
 public class UserLoginUI 
 {
     public static int userRole = 0;
     public static int uID = 0;
+
+    // Default Constructor
+    public UserLoginUI(){}
 
     public static Scene create(Stage stage)
     {
@@ -110,7 +114,7 @@ public class UserLoginUI
                         else // Display error message here! 
                         {System.out.println("No role found.");}  
                     }
-                    else
+                    else // Display error message here! 
                     {alert.showAndWait();}
  
                     usernameTextField.clear(); // Clears Username Box
@@ -196,7 +200,8 @@ public class UserLoginUI
                 options[i].setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
-                    public void handle(ActionEvent t) {}
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(SearchPage(stage));}
                 });
             }
         }
@@ -263,9 +268,7 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {
-                        stage.setScene(DeveloperBugListUI.create(stage)); 
-                    }
+                    {stage.setScene(DeveloperBugListUI.create(stage));}
                 });
             }
             else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Update Bug Status")
@@ -286,9 +289,7 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {
-                        System.out.println("Search Bugs");
-                    }
+                    {stage.setScene(SearchPage(stage));}
                 });
             }
         }
@@ -355,9 +356,16 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {
-                       stage.setScene(ReviewerBugListUI.create(stage)); 
-                    }
+                    {stage.setScene(ReviewerBugListUI.create(stage));}  
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Search Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(SearchPage(stage));} 
                 });
             }
         }
@@ -425,9 +433,16 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {
-                        stage.setScene(TriagerBugListUI.create(stage)); 
-                    }
+                    {stage.setScene(TriagerBugListUI.create(stage));} 
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Search Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(SearchPage(stage));}
                 });
             }
         }
@@ -438,8 +453,8 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                    stage.setScene(UserLoginUI.create(stage));
-                    System.out.println("User has logged out!");
+                stage.setScene(UserLoginUI.create(stage));
+                System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -452,4 +467,89 @@ public class UserLoginUI
         Scene scene2= new Scene(grid, 450, 400);
         return scene2;
     }
+    
+    public static Scene SearchPage(Stage stage)
+    {
+    	stage.setTitle("Search Page");
+    	
+    	GridPane grid = new GridPane(); // Setup the grid background
+        grid.setAlignment(Pos.TOP_LEFT);
+        grid.setHgap(30);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
+        VBox vbox = new VBox();
+        vbox.setPadding(new Insets(25, 25, 25, 25));
+        vbox.setSpacing(10);
+
+        Text title = new Text("Select Search by:");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        vbox.getChildren().add(title);
+        
+        Hyperlink option[] = new Hyperlink[] 
+        {
+            new Hyperlink("Keyword"),
+            new Hyperlink("Title"),
+            new Hyperlink("Assignee")
+            //any more you can add in 
+        };
+        
+        for (int i=0; i<3; i++) 
+        {
+            VBox.setMargin(option[i], new Insets(0, 0, 0, 8));
+            vbox.getChildren().add(option[i]);
+
+            if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Keyword")
+            {
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(SearchByKeywordUI.create(stage));}
+                });
+            }
+            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Title")
+            {
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(SearchByTitleUI.create(stage));}
+                });
+            }
+            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Assignee")
+            {
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(SearchByAssigneeUI.create(stage));}      
+                });
+            }
+        }
+        
+        Button backBtn = new Button("Back"); // Logout Button
+        backBtn.setOnAction(new EventHandler<ActionEvent>() 
+        {// Handles what actions happend when the button is clicked.  
+            @Override
+            public void handle(ActionEvent event) 
+            {
+                if(userRole == 1) {stage.setScene(ReporterPage(stage));}  
+                else if(userRole == 2) {stage.setScene(DeveloperPage(stage));}
+                else if(userRole == 3) {stage.setScene(ReviewerPage(stage));}
+                else if(userRole == 4) {stage.setScene(TriagerPage(stage));}
+                else {System.out.println("Invalid User Role!");}
+            }
+        });
+            
+        grid.add(vbox, 0, 0);
+        grid.add(backBtn, 0, 1);
+        
+        BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        grid.setBackground(background);
+
+        Scene scene= new Scene(grid, 450, 400);
+        return scene;
+    }  
 }

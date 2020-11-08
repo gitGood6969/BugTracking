@@ -1,6 +1,6 @@
 // Controller class
 // Package
-//package BugTracking;
+// package BugTracking;
 
 public class BugReportPageController 
 {	
