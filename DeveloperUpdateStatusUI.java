@@ -130,7 +130,7 @@ public class DeveloperUpdateStatusUI
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
 
-        scene = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
+        scene = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Developer Update Status Page");
         stage.setScene(scene);
         stage.show();
@@ -238,7 +238,7 @@ public class DeveloperUpdateStatusUI
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
         
-        Scene scene2 = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
+        Scene scene2 = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Bug Information");
         stage.setScene(scene2);
         stage.show();
