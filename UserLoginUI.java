@@ -138,7 +138,7 @@ public class UserLoginUI
         hbBtn.getChildren().add(btn1);
         grid.add(hbBtn, 1, 4);            // Add Login Button
         
-        Scene scene1 = new Scene(grid, 450, 400); // Adjust screen size
+        Scene scene1 = new Scene(grid, 550, 500); // Adjust screen size
         return scene1; 
     }
 
@@ -225,7 +225,7 @@ public class UserLoginUI
         Background background = new Background(background_fill);
         grid.setBackground(background);
 
-        Scene scene2= new Scene(grid, 450, 400);
+        Scene scene2= new Scene(grid, 550, 500);
         return scene2;
     } 
 
@@ -317,7 +317,7 @@ public class UserLoginUI
         Background background = new Background(background_fill);
         grid.setBackground(background);
 
-        Scene scene2= new Scene(grid, 450, 400);
+        Scene scene2= new Scene(grid, 550, 500);
         return scene2;
     } 
 
@@ -409,7 +409,7 @@ public class UserLoginUI
         Background background = new Background(background_fill);
         grid.setBackground(background);
 
-        Scene scene2= new Scene(grid, 450, 400);
+        Scene scene2= new Scene(grid, 550, 500);
         return scene2;
     }
 
@@ -501,7 +501,7 @@ public class UserLoginUI
         Background background = new Background(background_fill);
         grid.setBackground(background);
 
-        Scene scene2= new Scene(grid, 450, 400);
+        Scene scene2= new Scene(grid, 550, 500);
         return scene2;
     }
     
@@ -603,7 +603,7 @@ public class UserLoginUI
         Background background = new Background(background_fill);
         grid.setBackground(background);
 
-        Scene scene= new Scene(grid, 450, 400);
+        Scene scene= new Scene(grid, 550, 500);
         return scene;
     }
 }
