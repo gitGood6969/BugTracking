@@ -69,7 +69,7 @@ public class ReporterBugListUI
         Background background = new Background(background_fill);
         grid.setBackground(background);
 
-        scene = new Scene(grid, 450, 400);
+        scene = new Scene(grid, 550, 500);
         stage.setTitle("Reporter Bug List");
         stage.setScene(scene);
         stage.show();
