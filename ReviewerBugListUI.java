@@ -1,6 +1,8 @@
 // Boundary Class
+// [User Stories: #54]
+
 // Package
-// package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 import javafx.scene.Scene;                 // To use Scene 

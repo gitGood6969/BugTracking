@@ -1,8 +1,8 @@
-// Controller Class
-// [User Stories: #40 & many others...]
-    
+// Boundary class
+// [User Stories: #40 & others]
+
 // Package
-// package BugTracking;
+//package BugTracking;
 
 // import libraries
 import javafx.event.ActionEvent; 
@@ -114,7 +114,7 @@ public class UserLoginUI
                         else // Display error message here! 
                         {System.out.println("No role found.");}  
                     }
-                    else // Display error message here! 
+                    else
                     {alert.showAndWait();}
  
                     usernameTextField.clear(); // Clears Username Box
@@ -201,7 +201,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchPage(stage));}
+                    {
+                    	stage.setScene(SearchPage(stage));
+                    } 
                 });
             }
         }
@@ -268,7 +270,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(DeveloperBugListUI.create(stage));}
+                    {
+                        stage.setScene(DeveloperBugListUI.create(stage)); 
+                    }
                 });
             }
             else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Update Bug Status")
@@ -278,7 +282,7 @@ public class UserLoginUI
                     @Override
                     public void handle(ActionEvent t) 
                     {
-                        //stage.setScene(ReporterBugListUI.create(stage));
+                        stage.setScene(DeveloperUpdateStatusUI.create(stage));
                         System.out.println("Update Bug Status");
                     }    
                 });
@@ -289,7 +293,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchPage(stage));}
+                    {
+                    	stage.setScene(SearchPage(stage));
+                    } 
                 });
             }
         }
@@ -356,7 +362,20 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(ReviewerBugListUI.create(stage));}  
+                    {
+                       stage.setScene(ReviewerBugListUI.create(stage)); 
+                    }
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Update Bug Status")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                    	stage.setScene(ReviewerUpdateStatusUI.create(stage));
+                    } 
                 });
             }
             else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Search Bugs")
@@ -365,9 +384,12 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchPage(stage));} 
+                    {
+                    	stage.setScene(SearchPage(stage));
+                    } 
                 });
             }
+            
         }
 
         Button logoutBtn = new Button("Logout"); // Logout Button
@@ -433,7 +455,20 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(TriagerBugListUI.create(stage));} 
+                    {
+                        stage.setScene(TriagerBugListUI.create(stage)); 
+                    }
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Update Bug Status")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                    	stage.setScene(TriagerAssignmentUI.create(stage));
+                    } 
                 });
             }
             else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Search Bugs")
@@ -442,7 +477,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchPage(stage));}
+                    {
+                    	stage.setScene(SearchPage(stage));
+                    } 
                 });
             }
         }
@@ -453,8 +490,8 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                stage.setScene(UserLoginUI.create(stage));
-                System.out.println("User has logged out!");
+                    stage.setScene(UserLoginUI.create(stage));
+                    System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -493,7 +530,7 @@ public class UserLoginUI
             new Hyperlink("Assignee")
             //any more you can add in 
         };
-        
+
         for (int i=0; i<3; i++) 
         {
             VBox.setMargin(option[i], new Insets(0, 0, 0, 8));
@@ -505,7 +542,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchByKeywordUI.create(stage));}
+                    {
+                        stage.setScene(SearchByKeywordUI.create(stage));
+                    }
                 });
             }
             else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Title")
@@ -514,7 +553,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchByTitleUI.create(stage));}
+                    {
+                    	stage.setScene(SearchByTitleUI.create(stage));
+                    } 
                 });
             }
             else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Assignee")
@@ -523,7 +564,9 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {stage.setScene(SearchByAssigneeUI.create(stage));}      
+                    {
+                    	stage.setScene(SearchByAssigneeUI.create(stage));
+                    } 
                 });
             }
         }
@@ -534,11 +577,22 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                if(userRole == 1) {stage.setScene(ReporterPage(stage));}  
-                else if(userRole == 2) {stage.setScene(DeveloperPage(stage));}
-                else if(userRole == 3) {stage.setScene(ReviewerPage(stage));}
-                else if(userRole == 4) {stage.setScene(TriagerPage(stage));}
-                else {System.out.println("Invalid User Role!");}
+                if(userRole == 1)
+                {
+                    stage.setScene(ReporterPage(stage));
+                }
+                else if(userRole == 2)
+                {
+                    stage.setScene(DeveloperPage(stage));
+                }
+                else if(userRole == 3)
+                {
+                    stage.setScene(ReviewerPage(stage));
+                }
+                else if(userRole == 4)
+                {
+                    stage.setScene(TriagerPage(stage));
+                }
             }
         });
             
@@ -551,5 +605,5 @@ public class UserLoginUI
 
         Scene scene= new Scene(grid, 450, 400);
         return scene;
-    }  
+    }
 }

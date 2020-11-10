@@ -2,7 +2,7 @@
 // [User Stories: #40]
 
 // Package
-// package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 import java.io.File;

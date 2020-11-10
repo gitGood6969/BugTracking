@@ -2,7 +2,7 @@
 // [User Stories: #81]
 
 // Package
-// package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 

@@ -1,6 +1,8 @@
 // Boundary Class
+// [User Stories: #48]
+
 // Package
-// package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 import java.time.LocalDate;
@@ -28,7 +30,7 @@ public class BugReportPageUI
 { 
     public static Scene create (Stage stage) 
     { 
-        //date returns current date
+    	//date returns current date
         LocalDate today = LocalDate.now();
         int date = today.getDayOfMonth();
         int month = today.getMonthValue();
@@ -39,10 +41,10 @@ public class BugReportPageUI
         bugDateLabel.setStyle("-fx-font: normal bold 15px 'serif' "); 
 
         //Label for bug reported date
-        Text bugDateLabelCurrentDATE = new Text();
-        bugDateLabelCurrentDATE.setText(date + "/" + month + "/" + year);
-        bugDateLabelCurrentDATE.setStyle("-fx-font: normal 15px 'serif' ");
-        bugDateLabelCurrentDATE.setTextAlignment(TextAlignment.CENTER);
+        Text bugReportedDate = new Text();
+        bugReportedDate.setText(date + "/" + month + "/" + year);
+        bugReportedDate.setStyle("-fx-font: normal 15px 'serif' ");
+        bugReportedDate.setTextAlignment(TextAlignment.CENTER);
 
         //Label for bug ID
         Text bugIDLabel = new Text("Bug ID: "); 
@@ -112,7 +114,7 @@ public class BugReportPageUI
                     fail.setHeaderText("Fail to Submit");
                     fail.setContentText("You have not typed in anything for 'Bug Name'");
                     fail.showAndWait();
-		}	
+                }	
                 //Check if Bug Details is empty
                 else if (descriptionBugArea.getText() == null || descriptionBugArea.getText().trim().isEmpty()) 
                 {
@@ -157,7 +159,7 @@ public class BugReportPageUI
                     if(test1 == true && test2 == true)
                     {
                         BugReportPageController	controller = new BugReportPageController();
-                        if(controller.CreateBugReport(bugNameText.getText(), descriptionBugArea.getText()) == true)
+                        if(controller.CreateBugReport(bugReportedDate.getText(), bugNameText.getText(), descriptionBugArea.getText()) == true)
                         {
                             System.out.println("Successfully reported");
                             alert.showAndWait();
@@ -181,7 +183,7 @@ public class BugReportPageUI
 
         //Arranging all the nodes in the grid 
         grid.add(bugDateLabel, 0, 0);			//Add bugDate label 
-        grid.add(bugDateLabelCurrentDATE, 1, 0);//Add bugDate label (sets to the current date ("DD/MM/YYYY"))
+        grid.add(bugReportedDate, 1, 0);//Add bugDate label (sets to the current date ("DD/MM/YYYY"))
 		
         grid.add(bugNameLabel, 0, 1);			// Add bugName label
         grid.add(bugNameText, 1, 1);			// Add bugName TextField
@@ -198,7 +200,7 @@ public class BugReportPageUI
         HBox submitBtn = new HBox(10);        
         submitBtn.setAlignment(Pos.BOTTOM_RIGHT);
         submitBtn.getChildren().add(buttonSubmit);
-        grid.add(submitBtn, 1, 3);                      // Add Submit Button
+        grid.add(submitBtn, 1, 3);           	// Add Submit Button
 
         //styling background of grid
         BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
@@ -206,7 +208,7 @@ public class BugReportPageUI
         grid.setBackground(background);
 
         //Creating a scene object 
-        Scene scene = new Scene(grid, 450, 400); 
+        Scene scene = new Scene(grid, 550, 500); 
 
         //Setting title to the Stage 
         stage.setTitle("Bug Report"); 

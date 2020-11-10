@@ -1,6 +1,8 @@
 // Boundary Class
+// [User Stories: #52]
+
 // Package
-// package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 import javafx.event.ActionEvent;
@@ -20,6 +22,8 @@ import javafx.stage.Stage;
 
 public class ReporterBugListUI 
 {
+    public ReporterBugListUI() {} // Default Constuctor
+    
     public static Scene create(Stage stage)
     {
         Scene scene;

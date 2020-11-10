@@ -2,7 +2,7 @@
 // [User Stories: #40]
     
 // Package
-// package BugTracking;
+//package BugTracking;
 
 public class UserLoginController 
 {
