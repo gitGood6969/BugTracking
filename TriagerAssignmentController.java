@@ -2,7 +2,7 @@
 // [User Stories: #51]
 
 // Package
-// package BugTracking;
+//package BugTracking;
 
 public class TriagerAssignmentController 
 {

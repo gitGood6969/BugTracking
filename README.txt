@@ -48,6 +48,7 @@ BugCommentUI                    [#73]
 BugReportPageUI                 [#48]
 DeveloperBugListUI              [#53]
 DeveloperUpdateStatusUI         [#49]
+MonthlyBugReportUI              [#75]
 ReporterBugListUI               [#52]
 ReviewerBugListUI               [#54]
 ReviewerUpdateStatusUI          [#50]
@@ -64,6 +65,7 @@ BugCommentController            [#73]
 BugReportPageController         [#48]
 DeveloperBugListController      [#53]
 DeveloperUpdateStatusController [#49]
+MonthlyBugReportController      [#75]
 ReporterBugListController       [#52]
 ReviewerBugListController       [#54]
 ReviewerUpdateStatusController  [#50]
@@ -76,14 +78,20 @@ UserLoginController             [#40]
 UserLogoutController            [#44]
 
 Entity Class:
-BugList [Many]
-User    [#40, #44]
+BugList        [Many]
+GenerateReport [#75]
+User           [#40, #44]
 //==============================================
 Overview of all classes...[sort by User Story]
 User Stories:
 #40 As a User, I want to login to the system so that I can access the system according to my roles.
 UserLoginUI                     [Boundary]
 UserLoginController             [Controller]
+User                            [Entity]
+
+#44 As a User, I want to logout of the system so that I can end the session.
+UserLogoutUI                    [Boundary]
+UserLogoutController            [Controller]
 User                            [Entity]
 
 #48 As a Reporter, I want to report a bug so that the issue will be solved
@@ -126,6 +134,11 @@ TriagerBugListUI                [Boundary]
 TriagerBugListController        [Controller]
 BugList                         [Entity]
 
+#73 As a User, I want to be able to provide comments on the bug so that I can discuss with others how to fix it.
+BugCommentUI                    [Boundary]
+BugCommentController            [Controller]
+BugList                         [Entity]
+
 #79 As a User, I want to be able to search for bugs through keywords so that I can find the bug based on the description that I entered.
 SearchByKeywordUI               [Boundary]
 SearchByKeyworkController       [Controller]
@@ -144,24 +157,16 @@ BugList                         [Entity]
 //==============================================
 // NEW 12/11/2020
 //==============================================
-#44 As a User, I want to logout of the system so that I can end the session.
-UserLogoutUI                    [Boundary]
-UserLogoutController            [Controller]
-User                            [Entity]
-
-#73 As a User, I want to be able to provide comments on the bug so that I can discuss with others how to fix it.
-BugCommentUI                    [Boundary]
-BugCommentController            [Controller]
-BugList                         [Entity]
-
-//==============================================
-// Work In Progress!
-//==============================================
 #75 As a Triager, I want to generate a report for the number of bugs reported in a month 
 so that I know the number of bugs found have not increased compared to the previous month.
 MonthlyBugReportUI         [Boundary]
 MonthlyBugReportController [Controller]
 GenerateReport             [Entity]
+
+//==============================================
+// Work In Progress!
+//==============================================
+
 //==============================================
 // Pending...
 //==============================================

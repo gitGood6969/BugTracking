@@ -63,23 +63,12 @@ public class MonthlyBugReportUI
         // Dropdown Combo Box to select Months
         ComboBox selectMonth = new ComboBox();
 
-        // Inserting all the different Months
-        selectMonth.getItems().add("January");
-        selectMonth.getItems().add("February");
-        selectMonth.getItems().add("March");
-        selectMonth.getItems().add("April");
-        selectMonth.getItems().add("May");
-        selectMonth.getItems().add("June");
-        selectMonth.getItems().add("July");
-        selectMonth.getItems().add("August");
-        selectMonth.getItems().add("September");
-        selectMonth.getItems().add("October");
-        selectMonth.getItems().add("November");
-        selectMonth.getItems().add("December");
+        // Inserting all the different Months into combo box
+        addMonths(selectMonth);
 
         // Setting a default value to the dropdown combo box
         String startValue = "Select Month"; // Careful as its used in multiple areas
-        selectMonth.setValue("Select Month");
+        selectMonth.setValue(startValue);
 
         // Error message for when invalid input is supplied to Dropdown/combo box
         Alert alert1 = new Alert(AlertType.ERROR); 
@@ -101,16 +90,16 @@ public class MonthlyBugReportUI
                 if (selectMonth.getValue() != null &&   
                    ((selectMonth.getValue().toString()).equals(startValue))== false) // Variable startValue used here
                 {
-                    // extract the string month and convert to date. 
+                    // extract the string month and store it. 
                     String temp = selectMonth.getValue().toString();
-                    System.out.println("Test: " + temp);
+
+                    // Convert month from a string "January" to integer "1" 
+                    int month = convert2Month(temp);
 
                     // Call controller class here: 
                     MonthlyBugReportController ctrlReport = new MonthlyBugReportController();
 
-                    // CHANGE THIS PART SAMUEL [12/11/2020]
-                    // change 11 to month toggle
-                    ArrayList<String> a = ctrlReport.compileBugReport(11);
+                    ArrayList<String> a = ctrlReport.compileBugReport(month);
                     list.clear(); // Resets and empties the TextArea of previous Data
                     for (String str : a)
                     {
@@ -156,5 +145,41 @@ public class MonthlyBugReportUI
         stage.setScene(scene); 
         stage.show(); // Display Scene
         return scene; 
+    }
+
+    // method fills up combo/dropdown box with months
+    public static ComboBox addMonths(ComboBox selectMonth)
+    {
+        selectMonth.getItems().add("January");
+        selectMonth.getItems().add("February");
+        selectMonth.getItems().add("March");
+        selectMonth.getItems().add("April");
+        selectMonth.getItems().add("May");
+        selectMonth.getItems().add("June");
+        selectMonth.getItems().add("July");
+        selectMonth.getItems().add("August");
+        selectMonth.getItems().add("September");
+        selectMonth.getItems().add("October");
+        selectMonth.getItems().add("November");
+        selectMonth.getItems().add("December");
+        return selectMonth;
+    }
+
+    // Method reads in the month in string format and converts it to the month in number form
+    public static int convert2Month(String temp)
+    {
+             if (temp.equals("January"))  {return 1;}
+        else if (temp.equals("February")) {return 2;}
+        else if (temp.equals("March"))    {return 3;}
+        else if (temp.equals("April"))    {return 4;}
+        else if (temp.equals("May"))      {return 5;}
+        else if (temp.equals("June"))     {return 6;}
+        else if (temp.equals("July"))     {return 7;}
+        else if (temp.equals("August"))   {return 8;}
+        else if (temp.equals("September")){return 9;}
+        else if (temp.equals("October"))  {return 10;}
+        else if (temp.equals("November")) {return 11;}
+        else if (temp.equals("December")) {return 12;}
+        else {return 0;}
     }
 }
