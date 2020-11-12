@@ -1,5 +1,5 @@
 // Entity Class
-// [User Stories: #40]
+// [User Stories: #40, #44]
 
 // Package
 //package BugTracking;
@@ -64,12 +64,12 @@ public class User
                     {
                     	userID[0] = Integer.parseInt(tempArray[2]);
                     	userID[1] = Integer.parseInt(tempArray[3]);
-                    } // Return clearance level 
+                    }   // Return clearance level 
                 }
                 fileReader.close();
             }
             else 
-            {// Prompt error if "database" File doesn't exist
+            {// Prompt error if "userlist" File doesn't exist
                 System.out.println("File: " + myFile.getName() + " is missing! Unable to Authenticate any Users!");
                 System.out.println("Please ensure " + myFile.getName() + " exists before running the program!");
                 System.exit(0); // Terminates program if file is missing. 
@@ -77,5 +77,30 @@ public class User
         } 
         catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
         return userID;
+    }
+    
+    public String LogoutInfo(String userRole, String uID) 
+    {
+    	String name = "";
+    	try 
+        {  
+            File file = new File("userlist.txt"); 
+
+            Scanner fileReader = new Scanner(file);
+            while (fileReader.hasNextLine())
+            {
+                String data = fileReader.nextLine();
+                String[] tempArray = data.split(":"); 
+                if (tempArray[2].equals(userRole) && tempArray[3].equals(uID))
+                {
+                    name = tempArray[0];
+                    break;
+                } 
+            }
+            fileReader.close();
+        } 
+        catch (FileNotFoundException e) {System.out.println("An error occurred."); e.printStackTrace();}
+       
+    	return name;
     }
 }

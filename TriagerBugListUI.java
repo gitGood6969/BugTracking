@@ -82,7 +82,7 @@ public class TriagerBugListUI
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
 
-        scene = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
+        scene = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Triager Bug List");
         stage.setScene(scene);
         stage.show();

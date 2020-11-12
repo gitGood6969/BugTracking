@@ -46,7 +46,7 @@ public class TriagerAssignmentUI
         Text bugListLabel = new Text("Bugs not assigned"); // Create a text label/header
         TextArea list = new TextArea(); // Create list to hold "list of bugs"
         
-       TriagerAssignmentController ctrl = new TriagerAssignmentController();
+        TriagerAssignmentController ctrl = new TriagerAssignmentController();
         String[] strArray = getListOfBugs(ctrl);
         for(int i = 0; i < strArray.length; i++)
         {
@@ -99,8 +99,7 @@ public class TriagerAssignmentUI
                     TriagerAssignmentController ctrl = new TriagerAssignmentController();
                     String[] strArray2 = ctrl.TriagerGetBug(strArray[Integer.parseInt(input)-1], 2);
                     stage.setScene(scene2(stage, strArray2));
-            	}
-            	
+            	}     	
             }
         });
 
@@ -123,14 +122,13 @@ public class TriagerAssignmentUI
         grid.addRow(1, list);         // Adding list to grid
         grid.addRow(2, bugNum);       // Adding the "back" button to grid 
         grid.addRow(3, hbox);
-      
         
         // Change the color of the background
         BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
 
-        scene = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
+        scene = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Triager Record Assignment Page");
         stage.setScene(scene);
         stage.show();
@@ -238,7 +236,7 @@ public class TriagerAssignmentUI
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
         
-        Scene scene2 = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
+        Scene scene2 = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Bug Information");
         stage.setScene(scene2);
         stage.show();

@@ -130,7 +130,7 @@ public class DeveloperUpdateStatusUI
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
 
-        scene = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
+        scene = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Developer Update Status Page");
         stage.setScene(scene);
         stage.show();
@@ -193,7 +193,7 @@ public class DeveloperUpdateStatusUI
             {
             	if(bugStatusField.getText() == null || bugStatusField.getText().trim().isEmpty())
             	{
-            		Alert empty = new Alert(AlertType.WARNING);
+                    Alert empty = new Alert(AlertType.WARNING);
                     empty.setHeaderText("Empty Field Detected.");
                     empty.setContentText("Bug Status must not be left Empty");
                     empty.showAndWait();
@@ -201,13 +201,13 @@ public class DeveloperUpdateStatusUI
             	}
             	else if(bugStatusField.getText().toLowerCase().equals("fixed") || bugStatusField.getText().toLowerCase().equals("fixing"))
             	{
-            		String status = bugStatusField.getText().toLowerCase();
-            		DeveloperUpdateStatusController controller = new DeveloperUpdateStatusController();
-            		if(controller.DeveloperUpdateStatus(bugInfo[4], bugInfo[5], status, 0) == true)
-            		{
-            			alert.showAndWait();
-            			stage.setScene(create(stage));
-            		}
+                    String status = bugStatusField.getText().toLowerCase();
+                    DeveloperUpdateStatusController controller = new DeveloperUpdateStatusController();
+                    if(controller.DeveloperUpdateStatus(bugInfo[4], bugInfo[5], status, 0) == true)
+                    {
+                        alert.showAndWait();
+                        stage.setScene(create(stage));
+                    }
             		
             	}
             	else
@@ -238,7 +238,7 @@ public class DeveloperUpdateStatusUI
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
         
-        Scene scene2 = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
+        Scene scene2 = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
         stage.setTitle("Bug Information");
         stage.setScene(scene2);
         stage.show();

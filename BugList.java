@@ -31,8 +31,9 @@ public class BugList
         try
         {
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter (file, true)));
-            writer.println(UserLoginUI.userRole + ":" + UserLoginUI.uID + ":" + "0:" + "NotFixed:" + bugName + ":" + bugDescription + ":" + bugReportedDate + ":0");                                                              
+            writer.println(UserLoginUI.userRole + ":" + UserLoginUI.uID + ":" + "0:" + "notfixed:" + bugName + ":" + bugDescription + ":" + bugReportedDate + ":0" + ":");                                                              
             writer.close();
+            
         }
         catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
         return true;
@@ -47,7 +48,7 @@ public class BugList
         File file2 = new File("userlist.txt");
 
         try
-        {
+        {	
             Scanner readFile = new Scanner(file);
             while (readFile.hasNextLine())
             {		
@@ -83,6 +84,7 @@ public class BugList
                         tempArrayList.add(bug);                
                     }
                 }
+                //Display bug that have been fixed to Reviewer
                 else if(Integer.parseInt(role) == 3 && Integer.parseInt(num) == 1 && tempArray[3].equals("fixed"))
                 { 
                     String bug = "Bug Reported Date: " + tempArray[6] + "\nBug Name: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\nBug Status: " + tempArray[3] + "\n";   	
@@ -90,17 +92,20 @@ public class BugList
                     tempArrayList.add(bug);                
                 	
                 }
+                //Display bugs that have not been fixed to Developer
                 else if(Integer.parseInt(role) == 3 && Integer.parseInt(num) == 0 && !tempArray[3].equals("fixed"))
                 {
                     String bug = "Bug Reported Date: " + tempArray[6] + "\nBug Name: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\nBug Status: " + tempArray[3] + "\n";
                     bug = bug + "Bug have not been fixed.\n";
                     tempArrayList.add(bug);
                 }
+                //Display bugs that have not been assigned to anyone for Triager
                 else if(Integer.parseInt(role) == 4 && Integer.parseInt(num) == 0 && Integer.parseInt(tempArray[2]) == 0)
                 {
                     String bug = "Bug Reported Date: " + tempArray[6] + "\nBug Name: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\nAssigned to: Not assigned\n"; 
                     tempArrayList.add(bug);
                 }
+                //Display bug that have been assigned to someone for Triager
                 else if(Integer.parseInt(role) == 4 && Integer.parseInt(num) == 1 && Integer.parseInt(tempArray[2]) != 0)
                 {
                     Scanner readFile2 = new Scanner(file2);
@@ -127,7 +132,7 @@ public class BugList
                             break;
                         }
                     }
-                    readFile2.close();             
+                    readFile2.close();
                 }
             }
             readFile.close();
@@ -145,6 +150,7 @@ public class BugList
     {
     	ArrayList<String> tempArrayList = new ArrayList<String>();
         File file = new File("BugList.txt");
+        
         try
         {
             Scanner readFile = new Scanner(file);
@@ -298,12 +304,12 @@ public class BugList
             
         } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
     	
-        String[] strArray = new String[tempArrayList.size()];
-        for(int i = 0; i < tempArrayList.size(); i++)
-        {
-            strArray[i] = tempArrayList.get(i);
-        }
-        return strArray;
+    	 String[] strArray = new String[tempArrayList.size()];
+         for(int i = 0; i < tempArrayList.size(); i++)
+         {
+             strArray[i] = tempArrayList.get(i);
+         }
+         return strArray;
     }
     
     public boolean UpdateBugStatus(String bugName, String bugDesc, String updatedStatus, int num)
@@ -359,6 +365,7 @@ public class BugList
             }                                                             
             writer.close();
         } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
+    	
     	return true;
     }
     
@@ -398,7 +405,7 @@ public class BugList
                         }
                     }
                     readFile2.close();
-                }   
+                }
             }
             readFile1.close();
             
@@ -417,5 +424,142 @@ public class BugList
       
         } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
     	return exist;
+    }
+    
+    public String[] GetBugsForComment()
+    {
+    	ArrayList<String> tempArrayList = new ArrayList<String>();
+    	File file = new File("BugList.txt");
+    	try
+        {
+            Scanner readFile = new Scanner(file);
+            while (readFile.hasNextLine())
+            {		
+            	String fileText = readFile.nextLine();
+                String[] tempArray = fileText.split(":");
+                String bug = "Bug Reported Date: " + tempArray[6] + "\nBug Name: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\n";
+            	if(tempArray[7].equals("0"))
+            	{
+                    bug = bug + "Bug have not been fixed.\n";
+                    tempArrayList.add(bug);
+            	}
+            	else
+            	{
+                    bug = bug + "Bug was fixed on: " + tempArray[7] + "\n";
+                    tempArrayList.add(bug);                
+            	}   
+            }
+            readFile.close();
+        } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
+
+        String[] strArray = new String[tempArrayList.size()];
+        for(int i = 0; i < tempArrayList.size(); i++)
+        {strArray[i] = tempArrayList.get(i);}
+        return strArray;
+    }
+    
+    public String[] GetCommentForBug(String bug)
+    {
+    	ArrayList<String> tempArrayList = new ArrayList<String>();
+    	File file = new File("BugList.txt");
+    	
+    	try
+        {
+            Scanner readFile = new Scanner(file);
+            while (readFile.hasNextLine())
+            {		
+            	String fileText = readFile.nextLine();
+                String[] tempArray = fileText.split(":");
+                String[] tempArray2 = bug.split("\\r?\\n");
+                String bugName = tempArray2[1].substring(10);
+                String bugDesc = tempArray2[2].substring(17);
+                if(tempArray[4].equals(bugName) && tempArray[5].equals(bugDesc) && tempArray.length>8)
+                {
+                    System.out.println(tempArray.length);
+                    for(int i = 0; i<8 ;i++)
+                    {
+                    	tempArrayList.add(tempArray[i]);
+                    	System.out.println(tempArray[i]);
+                    }
+                    String[] commentArray = tempArray[8].split("@_");
+                    for(int j=0; j < commentArray.length; j++)
+                    {
+                        tempArrayList.add(commentArray[j]);
+                    }
+                   
+                }
+                else if(tempArray[4].equals(bugName) && tempArray[5].equals(bugDesc) && tempArray.length == 8)
+                {              	
+                    for(int i = 0; i<tempArray.length ;i++)
+                    {
+                    	tempArrayList.add(tempArray[i]);
+                    	System.out.println(tempArray[i]);
+                    }
+                }
+            }
+            readFile.close();
+            
+        } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
+
+    	 String[] strArray = new String[tempArrayList.size()];
+         for(int k = 0; k < tempArrayList.size(); k++)
+         {
+             strArray[k] = tempArrayList.get(k);
+         }
+         return strArray;
+    }
+    
+    public boolean CommentStatus(String bugName, String bugDesc, String comment)
+    {
+    	ArrayList<String> tempArrayList = new ArrayList<String>();
+    	File file1 = new File("userlist.txt");
+    	File file2 = new File("BugList.txt");
+    	String name = "";
+    	try
+        {
+            Scanner readFile1 = new Scanner(file1);
+            while (readFile1.hasNextLine())
+            {
+            	String fileText = readFile1.nextLine();
+                String[] tempArray = fileText.split(":");
+                if(Integer.parseInt(tempArray[2]) == UserLoginUI.userRole && Integer.parseInt(tempArray[3]) == UserLoginUI.uID)
+                {
+                    name = tempArray[0];
+                    break;
+                }    
+            }
+            readFile1.close();
+            
+            Scanner readFile2 = new Scanner(file2);
+            while(readFile2.hasNextLine())
+            {
+            	String fileText = readFile2.nextLine();
+            	String[] tempArray2 = fileText.split(":");
+            	if(tempArray2[4].equals(bugName) && tempArray2[5].equals(bugDesc))
+            	{
+                    fileText = fileText + "@_" + name + ";" + comment;
+                    tempArrayList.add(fileText);
+            	}
+            	else
+                {tempArrayList.add(fileText);}
+            }
+            readFile2.close();
+            
+            String[] strArray = new String[tempArrayList.size()];
+            for(int i = 0; i < tempArrayList.size(); i++)
+            {
+                strArray[i] = tempArrayList.get(i);
+            }
+                      
+            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter (file2)));
+            for(int j=0; j<tempArrayList.size(); j++)
+            {
+                writer.println(strArray[j]);
+            }                                                             
+            writer.close();
+      
+        } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
+    	
+    	return true;
     }
 }

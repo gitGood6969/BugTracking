@@ -1,53 +1,52 @@
-// Boundary Class 
-// [User Stories: #50]
+// Boundary Class
+// [User Stories: #73]
 
 // Package
 //package BugTracking;
 
 // Import Libraries
-import javafx.scene.Scene;                 // To use Scene 
-import javafx.stage.Stage;                 // To use Stage 
-import javafx.scene.layout.GridPane;       // To use Grid 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.geometry.Pos;                // To use Pos 
-import javafx.geometry.Insets;             // To use Insets 
-import javafx.scene.text.Text;             // To use Text 
-import javafx.scene.control.TextArea;      // To use TextArea
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BackgroundFill; // To use BackgroundFill 
-import javafx.scene.paint.Color;           // To use Color
-import javafx.scene.layout.CornerRadii;    // To use CornerRadii
-import javafx.scene.layout.Background;     // To use Background
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;        // To use Button
-import javafx.scene.control.Label;
-import javafx.event.EventHandler;          // To use Event Handle
-import javafx.event.ActionEvent;           // To use Action Event
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class ReviewerUpdateStatusUI
+public class BugCommentUI 
 {
-    static String input = "";
-	
-    public ReviewerUpdateStatusUI() {} // Default constructor
-    
-    public static Scene create (Stage stage)
+	static String input = "";
+    public static Scene create(Stage stage)
     {
-        Scene scene; // Create the backdrop for elements to be placed
+        Scene scene;
 
-        GridPane grid = new GridPane(); // Create Grid type backdrop to place elements on
+        GridPane grid = new GridPane();
         grid.setAlignment(Pos.BASELINE_CENTER);
         grid.setHgap(30);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text bugListLabel = new Text("Bug that is fixed"); // Create a text label/header
-        TextArea list = new TextArea(); // Create list to hold "list of bugs"
-        
-        ReviewerUpdateStatusController ctrl = new ReviewerUpdateStatusController();
-        String[] strArray = getListOfBugs(ctrl);
+        Text bugListLabel = new Text("Bug List");
+        TextArea list = new TextArea();
+        list.setPrefHeight(300);
+
+        //Code to get data from controller here
+        BugCommentController controller = new BugCommentController();
+        String[] strArray = GetListOfBugs(controller);
         for(int i = 0; i < strArray.length; i++)
         {
             if(i==0)
@@ -55,11 +54,35 @@ public class ReviewerUpdateStatusUI
             else
             {list.appendText("\n" + (i+1) + ". " + strArray[i]);}
         }
-        
-        list.setEditable(false); // Don't allow users to edit the list
+        list.setEditable(false);
+
+        Button buttonBack = new Button("Back"); 
+        buttonBack.setOnAction(new EventHandler<ActionEvent>() 
+        {// Handles what actions happened when the button is clicked.   
+            @Override
+            public void handle(ActionEvent event) 
+            {
+            	if(UserLoginUI.userRole == 1)
+                {
+                    stage.setScene(UserLoginUI.ReporterPage(stage));
+                }
+                else if(UserLoginUI.userRole == 2)
+                {
+                    stage.setScene(UserLoginUI.DeveloperPage(stage));
+                }
+                else if(UserLoginUI.userRole == 3)
+                {
+                    stage.setScene(UserLoginUI.ReviewerPage(stage));
+                }
+                else if(UserLoginUI.userRole == 4)
+                {
+                    stage.setScene(UserLoginUI.TriagerPage(stage));
+                }
+            }
+        });
         
         TextField bugNum = new TextField();
-        bugNum.setText("Enter Bug Number to update.");
+        bugNum.setText("Enter Bug Number to comment on.");
         bugNum.setOnMouseClicked(event-> {bugNum.clear();});
         
         Button nextBtn = new Button("Continue");  // "back" button to go back the Developer homepage
@@ -79,7 +102,7 @@ public class ReviewerUpdateStatusUI
                 }
             	else if(bugNum.getText().matches(".*\\s.*") || !bugNum.getText().matches("[0-9]+") || Integer.parseInt(bugNum.getText())<=0)
             	{
-            		Alert space = new Alert(AlertType.WARNING);
+                    Alert space = new Alert(AlertType.WARNING);
                     space.setHeaderText("Bad input.");
                     space.setContentText("Please enter a number from 1 onwards!");
                     space.showAndWait();
@@ -87,31 +110,22 @@ public class ReviewerUpdateStatusUI
             	}
             	else if(Integer.parseInt(bugNum.getText())>strArray.length)
             	{
-            		Alert outOfBounds = new Alert(AlertType.ERROR);
-                    outOfBounds.setHeaderText("Failed Update");
+                    Alert outOfBounds = new Alert(AlertType.ERROR);
+                    outOfBounds.setHeaderText("Failed getting bug comments.");
                     outOfBounds.setContentText("The Bug Number " + input + " was not found.");
                     outOfBounds.showAndWait();
                     bugNum.clear();
             	}
             	else
             	{
-                    //System.out.println(strArray[Integer.parseInt(input)-1]);
-                    ReviewerUpdateStatusController ctrl = new ReviewerUpdateStatusController();
-                    String[] strArray2 = ctrl.ReviewerGetBug(strArray[Integer.parseInt(input)-1], 1);
+                    BugCommentController ctrl = new BugCommentController();
+                    String[] strArray2 = ctrl.CreateComments(strArray[Integer.parseInt(input)-1]);
                     stage.setScene(scene2(stage, strArray2));
             	}
             	
             }
         });
 
-        Button buttonBack = new Button("Back");  // "back" button to go back the Developer homepage
-        buttonBack.setOnAction(new EventHandler<ActionEvent>() 
-        {// Handles what actions happened when the button is clicked.   
-            @Override
-            public void handle(ActionEvent event) 
-            {stage.setScene(UserLoginUI.ReviewerPage(stage));}
-        });
-        
         HBox hbox = new HBox();
         hbox.getChildren().add(buttonBack);
         Pane filler = new Pane();
@@ -119,28 +133,25 @@ public class ReviewerUpdateStatusUI
         HBox.setHgrow(filler, Priority.ALWAYS);
         hbox.getChildren().add(nextBtn);
 
-        grid.addRow(0, bugListLabel); // Adding label to grid
-        grid.addRow(1, list);         // Adding list to grid
-        grid.addRow(2, bugNum);       // Adding the "back" button to grid 
+        grid.addRow(0, bugListLabel); 
+        grid.addRow(1, list);         
+        grid.addRow(2, bugNum);   
         grid.addRow(3, hbox);
-      
-        
-        // Change the color of the background
+
         BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
-        grid.setBackground(background);    // Adding Background to Grid
+        grid.setBackground(background);
 
-        scene = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
-        stage.setTitle("Reviewer Update Status Page");
+        scene = new Scene(grid, 550, 500);
+        stage.setTitle("Bug List for Comment");
         stage.setScene(scene);
         stage.show();
-        return scene; 
-    }
-
-    public static String[] getListOfBugs(ReviewerUpdateStatusController ctrl)
+        return scene;
+    }    
+    
+    public static String[] GetListOfBugs(BugCommentController controller)
     {
-        String role = Integer.toString(UserLoginUI.userRole);
-        String[] strArray = ctrl.ViewListOfBugs(role, "1");
+        String[] strArray = controller.ViewBugsForComment();
         return strArray;
     }
     
@@ -154,11 +165,12 @@ public class ReviewerUpdateStatusUI
         
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
-        alert.setHeaderText("Successfully Updated!");
+        alert.setHeaderText("Successfully posted your comments.");
         alert.setContentText("You will be moved back to the previous page!");
         
         Label bugNameLabel = new Label("Bug Name:");
         TextField bugNameField = new TextField();
+        bugNameField.setPrefHeight(30);
         bugNameField.setText(bugInfo[4]);
         bugNameField.setEditable(false);
         
@@ -173,9 +185,25 @@ public class ReviewerUpdateStatusUI
         Label bugStatusLabel = new Label("Bug Status:");
         TextField bugStatusField = new TextField();
         bugStatusField.setText(bugInfo[3]);
-        bugStatusField.setOnMouseClicked(event-> {bugStatusField.clear();});
+        bugStatusField.setEditable(false);
         
-        Button buttonBack = new Button("Back");  
+        Label bugCommentLabel = new Label("Comments on bug:");
+        TextArea bugCommentArea = new TextArea();
+        bugCommentArea.setPrefHeight(100);
+        bugCommentArea.setPrefWidth(200);
+        for(int i = 9; i < bugInfo.length; i++)
+        {         
+            String[] tempArray = bugInfo[i].split(";");
+            bugCommentArea.appendText(tempArray[0] +" says: " + tempArray[1] + "\n");
+        }
+        bugCommentArea.setEditable(false);
+        
+        Label bugNewCommentLabel = new Label("New Comment:");
+        TextField bugNewCommentField = new TextField();
+        bugNewCommentField.setText("Enter new comments here!");
+        bugNewCommentField.setOnMouseClicked(event-> {bugNewCommentField.clear();});
+        
+        Button buttonBack = new Button("Back");  // "back" button to go back the Developer homepage
         buttonBack.setOnAction(new EventHandler<ActionEvent>() 
         {// Handles what actions happened when the button is clicked.   
             @Override
@@ -183,7 +211,7 @@ public class ReviewerUpdateStatusUI
             {stage.setScene(create(stage));}
         });
         
-        Button buttonUpdate = new Button("Update");  // "update" button to go back the Reviewer homepage
+        Button buttonUpdate = new Button("Submit");  // "back" button to go back the Developer homepage
         buttonUpdate.setOnAction(new EventHandler<ActionEvent>() 
         {// Handles what actions happened when the button is clicked.   
             @Override
@@ -191,30 +219,21 @@ public class ReviewerUpdateStatusUI
             {
             	if(bugStatusField.getText() == null || bugStatusField.getText().trim().isEmpty())
             	{
-                    Alert empty = new Alert(AlertType.WARNING);
+                    Alert empty = new Alert(AlertType.ERROR);
                     empty.setHeaderText("Empty Field Detected.");
-                    empty.setContentText("Bug Status must not be left Empty");
+                    empty.setContentText("Empty comment cannot be submitted.");
                     empty.showAndWait();
                     bugStatusField.setText(bugInfo[3]);
             	}
-            	else if(bugStatusField.getText().toLowerCase().equals("closed"))
-            	{
-                    String status = bugStatusField.getText().toLowerCase();
-                    ReviewerUpdateStatusController controller = new ReviewerUpdateStatusController();
-                    if(controller.ReviewerUpdateStatus(bugInfo[4], bugInfo[5], status, 1) == true)
-                    {
-                        alert.showAndWait();
-                        stage.setScene(create(stage));
-                    }
-            		
-            	}
             	else
-            	{
-                    Alert badStatus = new Alert(AlertType.ERROR);
-                    badStatus.setHeaderText("Bad Status detected");
-                    badStatus.setContentText("Bug Status can only be changed to closed");
-                    badStatus.showAndWait();
-                    bugStatusField.setText(bugInfo[3]);
+            	{        
+                    String comment = bugNewCommentField.getText();
+                    BugCommentController controller = new BugCommentController();
+                    if(controller.InsertComment(bugInfo[4], bugInfo[5], comment) == true)
+                    {
+                        stage.setScene(create(stage));
+                        alert.showAndWait();
+                    }
             	}
             }
         });
@@ -229,15 +248,19 @@ public class ReviewerUpdateStatusUI
         grid.add(bugDescArea, 1, 1);
         grid.add(bugStatusLabel, 0, 2);
         grid.add(bugStatusField, 1, 2);
-        grid.add(buttonBack, 0, 3);
-        grid.add(hbox, 1, 3);
+        grid.add(bugCommentLabel, 0, 3);
+        grid.add(bugCommentArea, 1, 3);
+        grid.add(bugNewCommentLabel, 0, 4);
+        grid.add(bugNewCommentField, 1, 4);
+        grid.add(buttonBack, 0, 5);
+        grid.add(hbox, 1, 5);
     	
         BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
         grid.setBackground(background);    // Adding Background to Grid
         
-        Scene scene2 = new Scene(grid, 450, 400); // Adding Grid to Scene and setting dimensions
-        stage.setTitle("Bug Information");
+        Scene scene2 = new Scene(grid, 550, 500); // Adding Grid to Scene and setting dimensions
+        stage.setTitle("Bug Comment Page");
         stage.setScene(scene2);
         stage.show();
         return scene2;

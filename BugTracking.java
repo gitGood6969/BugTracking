@@ -14,8 +14,11 @@ public class BugTracking extends Application
         primaryStage.setScene(UserLoginUI.create(primaryStage));
         primaryStage.show();
     }
+
     public static void main(String[] args)
-    {Application.launch(args);}
+    {   
+        Application.launch(args);
+    }
 }
 
 

@@ -31,11 +31,9 @@ import javafx.scene.control.PasswordField;
 
 public class UserLoginUI 
 {
+    //Save user's role and ID
     public static int userRole = 0;
     public static int uID = 0;
-
-    // Default Constructor
-    public UserLoginUI(){}
 
     public static Scene create(Stage stage)
     {
@@ -167,12 +165,13 @@ public class UserLoginUI
         {
             new Hyperlink("Report Bug"),
             new Hyperlink("View Bugs Reported"),
-            new Hyperlink("Search Bugs")
+            new Hyperlink("Search Bugs"),
+            new Hyperlink("Comment on Bugs")
             //any more you can add in 
         };
         
         // i<2 (the number 2 will change if more hyperlinks is added to options[])
-        for (int i=0; i<3; i++) 
+        for (int i=0; i<4; i++) 
         {
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
@@ -206,6 +205,17 @@ public class UserLoginUI
                     } 
                 });
             }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Comment on Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                    	stage.setScene(BugCommentUI.create(stage));
+                    } 
+                });
+            }
         }
 
         Button logoutBtn = new Button("Logout"); // Logout Button
@@ -214,7 +224,7 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                stage.setScene(UserLoginUI.create(stage));
+                stage.setScene(UserLogoutUI.create(stage));
                 System.out.println("User has logged out!");
             }
         });
@@ -254,12 +264,13 @@ public class UserLoginUI
         {
             new Hyperlink("View Bugs Assigned"),
             new Hyperlink("Update Bug Status"),
-            new Hyperlink("Search Bugs")						
+            new Hyperlink("Search Bugs"),
+            new Hyperlink("Comment on Bugs")
             //any more you can add in 
         };
 		
         // i<2 (the number 2 will change if more hyperlinks is added to options[])
-        for (int i=0; i<3; i++) 
+        for (int i=0; i<4; i++) 
         {
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
@@ -298,6 +309,17 @@ public class UserLoginUI
                     } 
                 });
             }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Comment on Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                    	stage.setScene(BugCommentUI.create(stage));
+                    } 
+                });
+            }
         }
 
         Button logoutBtn = new Button("Logout"); // Logout Button
@@ -306,7 +328,7 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                stage.setScene(UserLoginUI.create(stage));
+                stage.setScene(UserLogoutUI.create(stage));
                 System.out.println("User has logged out!");
             }
         });
@@ -346,12 +368,13 @@ public class UserLoginUI
         {
             new Hyperlink("View list of Bugs"),
             new Hyperlink("Update Bug Status"),
-            new Hyperlink("Search Bugs")			
+            new Hyperlink("Search Bugs"),
+            new Hyperlink("Comment on Bugs")
             //any more you can add in 
         };
 		
         // i<2 (the number 2 will change if more hyperlinks is added to options[])
-        for (int i=0; i<3; i++) 
+        for (int i=0; i<4; i++) 
         {
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
@@ -389,6 +412,17 @@ public class UserLoginUI
                     } 
                 });
             }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Comment on Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                    	stage.setScene(BugCommentUI.create(stage));
+                    } 
+                });
+            }
             
         }
 
@@ -398,7 +432,7 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                stage.setScene(UserLoginUI.create(stage));
+                stage.setScene(UserLogoutUI.create(stage));
                 System.out.println("User has logged out!");
             }
         });
@@ -437,14 +471,15 @@ public class UserLoginUI
         Hyperlink options[] = new Hyperlink[] 
         {
             new Hyperlink("View list of Bugs"),
-            new Hyperlink("Update Bug Status"),
+            new Hyperlink("Assign Bug"),
             new Hyperlink("Search Bugs"),
+            new Hyperlink("Comment on Bugs"),
             new Hyperlink("Generate Bug Report")
             //any more you can add in 
         };
 		
         // i<2 (the number 2 will change if more hyperlinks is added to options[])
-        for (int i=0; i<4; i++) 
+        for (int i=0; i<5; i++) 
         {
             VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(options[i]);
@@ -460,7 +495,7 @@ public class UserLoginUI
                     }
                 });
             }
-            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Update Bug Status")
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Assign Bug")
             {
                 options[i].setOnAction(new EventHandler<ActionEvent>() 
                 {
@@ -482,6 +517,26 @@ public class UserLoginUI
                     } 
                 });
             }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Comment on Bugs")
+            {
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {
+                    	stage.setScene(BugCommentUI.create(stage));
+                    } 
+                });
+            }
+            else if (options[i].onMouseClickedProperty() != null && options[i].getText() == "Generate Bug Report") // Samuel
+            {// Hyperlink for Generating Report
+                options[i].setOnAction(new EventHandler<ActionEvent>() 
+                {// Link to Select Generate Report Type
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {stage.setScene(GenerateReport(stage));}
+                });
+            }
         }
 
         Button logoutBtn = new Button("Logout"); // Logout Button
@@ -490,8 +545,8 @@ public class UserLoginUI
             @Override
             public void handle(ActionEvent event) 
             {
-                    stage.setScene(UserLoginUI.create(stage));
-                    System.out.println("User has logged out!");
+                stage.setScene(UserLogoutUI.create(stage));
+                System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -530,7 +585,7 @@ public class UserLoginUI
             new Hyperlink("Assignee")
             //any more you can add in 
         };
-
+        
         for (int i=0; i<3; i++) 
         {
             VBox.setMargin(option[i], new Insets(0, 0, 0, 8));
@@ -604,6 +659,113 @@ public class UserLoginUI
         grid.setBackground(background);
 
         Scene scene= new Scene(grid, 550, 500);
+        return scene;
+    }
+
+    // UI for Generate Report page
+    // [User Stories #75, #76, #77]
+    public static Scene GenerateReport(Stage stage) // Samuel
+    {
+    	stage.setTitle("Generate Report Page");
+    	
+    	GridPane grid = new GridPane(); // Setup the grid background
+        grid.setAlignment(Pos.TOP_LEFT);
+        grid.setHgap(30);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
+        VBox vbox = new VBox();
+        vbox.setPadding(new Insets(25, 25, 25, 25));
+        vbox.setSpacing(10);
+
+        Text title = new Text("Generate Report by:");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        vbox.getChildren().add(title);
+        
+        Hyperlink option[] = new Hyperlink[] 
+        {
+            new Hyperlink("Bugs Reported"),        // [User Story #75]
+            new Hyperlink("Bugs Resolved"),        // [User Story #76]
+            new Hyperlink("Reporter Performance"), // [User Story #77]
+            new Hyperlink("Developer Performance") // [User Story #77]
+        };
+
+        // Increment the i < 4 accordingly with the number of Hyperlinks
+        for (int i=0; i<4; i++) 
+        {
+            VBox.setMargin(option[i], new Insets(0, 0, 0, 8));
+            vbox.getChildren().add(option[i]);
+
+            if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Bugs Reported")
+            {// [User Story #75]
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {// Deploy Bugs Reported UI [Boundary Class]
+                        stage.setScene(MonthlyBugReportUI.create(stage));
+                    }
+                });
+            }
+            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Bugs Resolved")
+            {// [User Story #76]
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {// Deploy Bugs Resolved UI [Boundary Class]
+                    	//stage.setScene(SearchByTitleUI.create(stage));
+                        System.out.println("Bugs Resolved UI");
+                    } 
+                });
+            }
+            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Reporter Performance")
+            {// [User Story #77]
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {// Deploy Reporter Performance UI [Boundary Class]
+                    	//stage.setScene(SearchByAssigneeUI.create(stage));
+                        System.out.println("Reporter Performance UI");
+                    } 
+                });
+            }
+            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Developer Performance")
+            {// [User Story #77]
+                option[i].setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent t) 
+                    {// Deploy Developer Performance UI [Boundary Class]
+                    	//stage.setScene(SearchByAssigneeUI.create(stage));
+                        System.out.println("Developer Performance UI");
+                    } 
+                });
+            }
+        }
+        
+        Button backBtn = new Button("Back"); // Back Button
+        backBtn.setOnAction(new EventHandler<ActionEvent>() 
+        {// Handles what actions happend when the button is clicked.  
+            @Override
+            public void handle(ActionEvent event) 
+            {
+                if(userRole == 1) {stage.setScene(ReporterPage(stage));}
+                else if(userRole == 2) {stage.setScene(DeveloperPage(stage));}
+                else if(userRole == 3) {stage.setScene(ReviewerPage(stage));}
+                else if(userRole == 4) {stage.setScene(TriagerPage(stage));} 
+            }
+        });
+            
+        grid.add(vbox, 0, 0);
+        grid.add(backBtn, 0, 1);
+        
+        BackgroundFill background_fill = new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        grid.setBackground(background);
+
+        Scene scene= new Scene(grid, 450, 400);
         return scene;
     }
 }

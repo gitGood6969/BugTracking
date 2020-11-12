@@ -8,13 +8,23 @@ java BugTracking
 //==============================================
 How to read the database files...
 BugList.txt:
-reporterRole :reporterID :assignedTo :status   :bugName   :bugDescription :dateReported :bugFixedDate
-1            :2          :4          :fixed    :testing 1 :bug report 1   :7/11/2020    :0
-1            :2          :4          :fixing   :testing 2 :bug report 2   :2/11/2020    :0
-1            :3          :4          :fixed    :testing 3 :bug report 3   :28/10/2020   :10/11/2020
-1            :3          :0          :notfixed :testing 4 :bug report 4   :10/10/2020   :0
+reporterRole :reporterID :assignedTo :status   :bugName   :bugDescription       :dateReported :bugFixedDate :@_commentorName ;comment
+1            :2          :4          :fixed    :testing 1 :bug report 1         :7/11/2020    :0            :@_tom           ;testing            
+1            :2          :4          :fixing   :testing 2 :bug report 2         :2/11/2020    :0            :                ;
+1            :3          :4          :fixed    :testing 3 :bug report 3         :28/10/2020   :10/11/2020   :                ;
+1            :3          :0          :notfixed :testing 4 :bug report 4         :10/10/2020   :0            :                ; 
+1            :2          :4          :closed   :SQL server:Reconnects frequently:2/11/2020    :09/11/2020   :                ;
 
-database.txt
+Status (only 4):
+fixed
+fixing
+notfixed
+closed
+
+"@_commentorName" and "comment" can be repeated at the back if there are multiple comments
+The commentorName is delimited by "@_"
+
+userlist.txt
 username :password :role :ID
 tom      :111      :1    :2
 bob      :222      :2    :4
@@ -34,6 +44,7 @@ Driver Class:
 BugTracking
 
 Boundary Class:
+BugCommentUI                    [#73] 
 BugReportPageUI                 [#48]
 DeveloperBugListUI              [#53]
 DeveloperUpdateStatusUI         [#49]
@@ -45,9 +56,11 @@ SearchByKeywordUI               [#79]
 SearchByTitleUI                 [#80]
 TriagerAssignmentUI             [#51]  
 TriagerBugListUI                [#55]
-UserLoginUI                     [#40 & others]         
+UserLoginUI                     [#40 & others]   
+UserLogoutUI                    [#44]      
 
 Controller Class:
+BugCommentController            [#73]
 BugReportPageController         [#48]
 DeveloperBugListController      [#53]
 DeveloperUpdateStatusController [#49]
@@ -60,10 +73,11 @@ SearchByTitleController         [#80]
 TriagerAssignmentController     [#51]
 TriagerBugListController        [#55]
 UserLoginController             [#40]
+UserLogoutController            [#44]
 
 Entity Class:
 BugList [Many]
-User    [#40]
+User    [#40, #44]
 //==============================================
 Overview of all classes...[sort by User Story]
 User Stories:
@@ -80,6 +94,16 @@ BugList                         [Entity]
 #49 As a Developer, I want to be able to update the status of the bug so that Reviewers can check if it has been fixed with the patches provided.
 DeveloperUpdateStatusUI         [Boundary]
 DeveloperUpdateStatusController [Controller]
+BugList                         [Entity]
+
+#50 As a Reviewer, I want to be able to update the status of the bug so that I can record it as closed after checking if it has been fixed.
+ReviewerUpdateStatusUI          [Boundary]
+ReviewerUpdateStatusController  [Controller]
+BugList                         [Entity]
+
+#51 As a Triager, I want to be able to record the assignment of the bug so that i know that it is being handled by someone
+TriagerAssignmentUI             [Boundary]
+TriagerAssignmentController     [Controller]
 BugList                         [Entity]
 
 #52 As a Reporter, I want to view the list of bugs I have reported so that I know if it has been fixed.
@@ -117,21 +141,40 @@ SearchByAssigneeUI              [Boundary]
 SearchByAssigneeController      [Controller]
 BugList                         [Entity]
 
+//==============================================
+// NEW 12/11/2020
+//==============================================
+#44 As a User, I want to logout of the system so that I can end the session.
+UserLogoutUI                    [Boundary]
+UserLogoutController            [Controller]
+User                            [Entity]
 
-//==============================================
-// NEW 10/11/2020  
-//==============================================
-#50 As a Reviewer, I want to be able to update the status of the bug so that I can record it as closed after checking if it has been fixed.
-ReviewerUpdateStatusUI          [Boundary]
-ReviewerUpdateStatusController  [Controller]
+#73 As a User, I want to be able to provide comments on the bug so that I can discuss with others how to fix it.
+BugCommentUI                    [Boundary]
+BugCommentController            [Controller]
 BugList                         [Entity]
 
-#51 As a Triager, I want to be able to record the assignment of the bug so that i know that it is being handled by someone
-TriagerAssignmentUI             [Boundary]
-TriagerAssignmentController     [Controller]
-BugList                         [Entity]
 //==============================================
+// Work In Progress!
+//==============================================
+#75 As a Triager, I want to generate a report for the number of bugs reported in a month 
+so that I know the number of bugs found have not increased compared to the previous month.
+MonthlyBugReportUI         [Boundary]
+MonthlyBugReportController [Controller]
+GenerateReport             [Entity]
+//==============================================
+// Pending...
+//==============================================
+#77 As a Triager, I want to generate a report for the best performing reporter or 
+developer so that I can rely on them more heavily in the future due to their 
+experience on identifying and fixing bugs.
+PerformanceReportUI         [Boundary]
+PerformanceReportController [Controller]
+GenerateReport              [Entity]
 
-
-
+#76 As a Triager, I want to generate a report for the number of bugs resolved 
+in a week so that I know the efficiency of the Developer team.
+WeeklyBugReportUI          [Boundary]
+WeeklyBugReportController  [Controller]
+GenerateReport             [Entity]
 
