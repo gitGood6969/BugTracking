@@ -13,7 +13,7 @@ public class SearchByTitleController
 
     // Method calls passes a String as a title to Entity class
     // Returns a String Array
-    public String[] ValidateTitle(String title)
+    public String[] SearchTitle(String title)
     {
         BugList bugList = new BugList();
         return bugList.searchByTitleResult(title);

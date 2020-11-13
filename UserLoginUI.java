@@ -702,7 +702,7 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {// Deploy Bugs Reported UI [Boundary Class]
+                    {// Deploy Monthly Bugs Reported UI [Boundary Class]
                         stage.setScene(MonthlyBugReportUI.create(stage));
                     }
                 });
@@ -713,9 +713,8 @@ public class UserLoginUI
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {// Deploy Bugs Resolved UI [Boundary Class]
-                    	//stage.setScene(SearchByTitleUI.create(stage));
-                        System.out.println("Bugs Resolved UI");
+                    {// Deploy Weekly Bugs Resolved UI [Boundary Class]
+                    	stage.setScene(WeeklyBugReportUI.create(stage));
                     } 
                 });
             }

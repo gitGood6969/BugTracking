@@ -11,7 +11,7 @@ import java.util.Arrays;    // To use Array containers
 
 public class MonthlyBugReportController 
 {   
-    //private String[] strArray; // Private Variable
+    // Private Variable
     private ArrayList<String []> rawData = new ArrayList<String []>();
 
     // Default Constructor

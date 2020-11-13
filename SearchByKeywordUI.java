@@ -72,7 +72,7 @@ public class SearchByKeywordUI
             	{
                     String keyword = searchTextField.getText();
                     SearchByKeywordController ctrl = new SearchByKeywordController();
-                    String[] strArray = ctrl.ValidateKeyword(keyword);
+                    String[] strArray = ctrl.SearchKeyword(keyword);
 
                     if(strArray.length==0)
                     {results.appendText("No bugs found with " + keyword + ".");}

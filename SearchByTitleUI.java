@@ -72,7 +72,7 @@ public class SearchByTitleUI
             	{
                     String title = searchTextField.getText();
                     SearchByTitleController ctrl = new SearchByTitleController();
-                    String[] strArray = ctrl.ValidateTitle(title);
+                    String[] strArray = ctrl.SearchTitle(title);
 
                     if(strArray.length==0)
                     {results.appendText("No bug title found with " + title + ".");}

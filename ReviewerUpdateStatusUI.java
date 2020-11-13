@@ -2,7 +2,7 @@
 // [User Stories: #50]
 
 // Package
-/package BugTracking;
+//package BugTracking;
 
 // Import Libraries
 import javafx.scene.Scene;                 // To use Scene 

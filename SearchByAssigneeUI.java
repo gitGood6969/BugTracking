@@ -64,7 +64,7 @@ public class SearchByAssigneeUI
             	{
             		String assignee = searchTextField.getText();
             		SearchByAssigneeController ctrl = new SearchByAssigneeController();
-            		String[] strArray = ctrl.ValidateAssignee(assignee);
+            		String[] strArray = ctrl.SearchAssignee(assignee);
             		
             		if(strArray.length==0)
             		{

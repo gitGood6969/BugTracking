@@ -1,5 +1,5 @@
 // Boundary Class
-// [User Stories: #75]
+// [User Stories: #76]
 
 // Package
 //package BugTracking;
@@ -29,10 +29,13 @@ import javafx.event.ActionEvent;           // To use Action Event
 import javafx.scene.control.ComboBox;      // To use the Dropdown combo box for selecting which Month
 import java.util.ArrayList;                // To use the ArrayList variable container
 import java.util.Arrays;                   // To use Array containers
+import javafx.scene.control.DatePicker;    // To use the DatePicker/ Calendar 
+import java.time.LocalDate;                // To be able to take in Date and manipulate it 
 
-public class MonthlyBugReportUI 
+
+public class WeeklyBugReportUI 
 {
-    public MonthlyBugReportUI() {} // Default constructor
+    public WeeklyBugReportUI() {} // Default constructor
 
     public static Scene create (Stage stage)
     {
@@ -46,8 +49,9 @@ public class MonthlyBugReportUI
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         // Create a text label/header
-        Text bugListLabel = new Text("Bugs Reported:"); 
-        
+        Text bugListLabel = new Text("Report:"); 
+        Text informUser = new Text("Please select a day:");
+
         // Create list to hold "list of bugs"
         TextArea list = new TextArea(); 
 
@@ -59,49 +63,41 @@ public class MonthlyBugReportUI
 
         list.setEditable(false); // Don't allow users to edit fields
         list.setWrapText(true); // Set Wrap Text
-        
-        // Dropdown Combo Box to select Months
-        ComboBox selectMonth = new ComboBox();
 
-        // Inserting all the different Months into combo box
-        addMonths(selectMonth);
+        // Create the calendar/datepicker object
+        DatePicker selectDate = new DatePicker();
 
-        // Setting a default value to the dropdown combo box
-        String startValue = "Select Month"; // Careful as its used in multiple areas
-        selectMonth.setValue(startValue);
+        // Set default value to current date
+        selectDate.setValue(LocalDate.now());
 
         // Error message for when invalid input is supplied to Dropdown/combo box
         Alert alert1 = new Alert(AlertType.ERROR); 
         alert1.setTitle("Something went wrong...");
-        alert1.setHeaderText("Wrong Month Detected");
-        alert1.setContentText("Please enter a valid Month!");
+        alert1.setHeaderText("Wrong Day Detected");
+        alert1.setContentText("Please enter a valid Day!");
+
 
         // Adding a Generate Button
-        Button generate = new Button("Generate Report");  
+        Button generate = new Button("Generate Report"); 
 
-        // Add an event handler to the generate button to process data when clicked
+        // Add an event handler to the generate button to process data when clicked   
         generate.setOnAction(new EventHandler<ActionEvent>() 
         {// Handles what actions happened when the button is clicked.   
             @Override
-            public void handle(ActionEvent event) 
+            public void handle(ActionEvent event)
             {
                 // validate contents of dropdown/combo box 
-                // Checks that it isn't null or at the default value: "Select Month"
-                if (selectMonth.getValue() != null &&   
-                   ((selectMonth.getValue().toString()).equals(startValue))== false) // Variable startValue used here
+                // Checks that it isn't null
+                if (selectDate.getValue() != null) 
                 {
-                    // extract the string month and store it. 
-                    String temp = selectMonth.getValue().toString();
+                    LocalDate inputDate = selectDate.getValue();
+                    
+                    // Calls the controller class and retrieve the report
+                    WeeklyBugReportController ctrl = new WeeklyBugReportController(); 
+                    ArrayList<String> report = ctrl.compileBugReport(inputDate);
 
-                    // Convert month from a string "January" to integer "1" 
-                    int month = convert2Month(temp);
-
-                    // Call controller class here: 
-                    MonthlyBugReportController ctrlReport = new MonthlyBugReportController();
-
-                    ArrayList<String> a = ctrlReport.compileBugReport(month);
                     list.clear(); // Resets and empties the TextArea of previous Data
-                    for (String str : a)
+                    for (String str : report) // Display Report
                     {
                         list.appendText(str + "\n");
                     }
@@ -109,8 +105,8 @@ public class MonthlyBugReportUI
                 else 
                 {
                     alert1.showAndWait();
-                    selectMonth.setValue(startValue); // Reset the dropdown box // varaible startValue used here
-                }
+                    selectDate.setValue(LocalDate.now()); // Reset the datepicker
+                }  
             }
         });
 
@@ -121,15 +117,16 @@ public class MonthlyBugReportUI
             public void handle(ActionEvent event) 
             {stage.setScene(UserLoginUI.GenerateReport(stage));}
         });
-        
+
         // Creating a hbox to store elements horizontally  
         HBox hbox = new HBox();
         hbox.setSpacing(20);
-        hbox.getChildren().add(selectMonth); // Adding Dropdown box
+        hbox.getChildren().add(informUser);  // Adding the label to tell users to select a day
+        hbox.getChildren().add(selectDate);  // Adding datepicker/calendar box
         hbox.getChildren().add(generate);    // Adding "Generate" button
 
         // Putting elements together
-        grid.addRow(0, hbox);         // Adding combobox and generate report button to grid
+        grid.addRow(0, hbox);         // Adding datepicker and generate report button to grid
         grid.addRow(1, bugListLabel); // Adding label to grid
         grid.addRow(2, list);         // Adding list to grid
         grid.addRow(3, buttonBack);   // Adding the "back" button to grid
@@ -141,45 +138,9 @@ public class MonthlyBugReportUI
 
         // Adding Grid to Scene and setting dimensions
         scene = new Scene(grid, 700, 500); 
-        stage.setTitle("Monthly Bug Report Page"); // Title of the Page
+        stage.setTitle("Weekly Bug Report Page"); // Title of the Page
         stage.setScene(scene); 
         stage.show(); // Display Scene
         return scene; 
-    }
-
-    // method fills up combo/dropdown box with months
-    public static ComboBox addMonths(ComboBox selectMonth)
-    {
-        selectMonth.getItems().add("January");
-        selectMonth.getItems().add("February");
-        selectMonth.getItems().add("March");
-        selectMonth.getItems().add("April");
-        selectMonth.getItems().add("May");
-        selectMonth.getItems().add("June");
-        selectMonth.getItems().add("July");
-        selectMonth.getItems().add("August");
-        selectMonth.getItems().add("September");
-        selectMonth.getItems().add("October");
-        selectMonth.getItems().add("November");
-        selectMonth.getItems().add("December");
-        return selectMonth;
-    }
-
-    // Method reads in the month in string format and converts it to the month in number form
-    public static int convert2Month(String temp)
-    {
-             if (temp.equals("January"))  {return 1;}
-        else if (temp.equals("February")) {return 2;}
-        else if (temp.equals("March"))    {return 3;}
-        else if (temp.equals("April"))    {return 4;}
-        else if (temp.equals("May"))      {return 5;}
-        else if (temp.equals("June"))     {return 6;}
-        else if (temp.equals("July"))     {return 7;}
-        else if (temp.equals("August"))   {return 8;}
-        else if (temp.equals("September")){return 9;}
-        else if (temp.equals("October"))  {return 10;}
-        else if (temp.equals("November")) {return 11;}
-        else if (temp.equals("December")) {return 12;}
-        else {return 0;}
     }
 }
