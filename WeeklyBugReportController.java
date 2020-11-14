@@ -85,9 +85,7 @@ public class WeeklyBugReportController
                     counter++; // Increment counter
                 }
                 else
-                {
-                    // If NOT, then the program ignores such lines
-                }    
+                {}  // If NOT, then the program ignores such lines   
             }
             else                
             {    

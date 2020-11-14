@@ -225,7 +225,6 @@ public class UserLoginUI
             public void handle(ActionEvent event) 
             {
                 stage.setScene(UserLogoutUI.create(stage));
-                System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -329,7 +328,6 @@ public class UserLoginUI
             public void handle(ActionEvent event) 
             {
                 stage.setScene(UserLogoutUI.create(stage));
-                System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -433,7 +431,6 @@ public class UserLoginUI
             public void handle(ActionEvent event) 
             {
                 stage.setScene(UserLogoutUI.create(stage));
-                System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -546,7 +543,6 @@ public class UserLoginUI
             public void handle(ActionEvent event) 
             {
                 stage.setScene(UserLogoutUI.create(stage));
-                System.out.println("User has logged out!");
             }
         });
         grid.add(vbox, 0, 0);
@@ -686,12 +682,11 @@ public class UserLoginUI
         {
             new Hyperlink("Bugs Reported"),        // [User Story #75]
             new Hyperlink("Bugs Resolved"),        // [User Story #76]
-            new Hyperlink("Reporter Performance"), // [User Story #77]
-            new Hyperlink("Developer Performance") // [User Story #77]
+            new Hyperlink("Performance Report"),   // [User Story #77]
         };
 
         // Increment the i < 4 accordingly with the number of Hyperlinks
-        for (int i=0; i<4; i++) 
+        for (int i=0; i<3; i++) 
         {
             VBox.setMargin(option[i], new Insets(0, 0, 0, 8));
             vbox.getChildren().add(option[i]);
@@ -718,27 +713,14 @@ public class UserLoginUI
                     } 
                 });
             }
-            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Reporter Performance")
+            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Performance Report")
             {// [User Story #77]
                 option[i].setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
                     public void handle(ActionEvent t) 
-                    {// Deploy Reporter Performance UI [Boundary Class]
-                    	//stage.setScene(SearchByAssigneeUI.create(stage));
-                        System.out.println("Reporter Performance UI");
-                    } 
-                });
-            }
-            else if (option[i].onMouseClickedProperty() != null && option[i].getText() == "Developer Performance")
-            {// [User Story #77]
-                option[i].setOnAction(new EventHandler<ActionEvent>() 
-                {
-                    @Override
-                    public void handle(ActionEvent t) 
-                    {// Deploy Developer Performance UI [Boundary Class]
-                    	//stage.setScene(SearchByAssigneeUI.create(stage));
-                        System.out.println("Developer Performance UI");
+                    {// Deploy Performance Report UI [Boundary Class]
+                    	stage.setScene(PerformanceReportUI.create(stage));
                     } 
                 });
             }

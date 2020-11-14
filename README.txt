@@ -49,6 +49,7 @@ BugReportPageUI                 [#48]
 DeveloperBugListUI              [#53]
 DeveloperUpdateStatusUI         [#49]
 MonthlyBugReportUI              [#75]
+PerformanceReportUI             [#77]
 ReporterBugListUI               [#52]
 ReviewerBugListUI               [#54]
 ReviewerUpdateStatusUI          [#50]
@@ -67,6 +68,7 @@ BugReportPageController         [#48]
 DeveloperBugListController      [#53]
 DeveloperUpdateStatusController [#49]
 MonthlyBugReportController      [#75]
+PerformanceReportController     [#77]
 ReporterBugListController       [#52]
 ReviewerBugListController       [#54]
 ReviewerUpdateStatusController  [#50]
@@ -81,7 +83,7 @@ WeeklyBugReportController       [#76]
 
 Entity Class:
 BugList        [Many]
-GenerateReport [#75, #76]
+GenerateReport [#75, #76, #77]
 User           [#40, #44]
 //==============================================
 Overview of all classes...[sort by User Story]
@@ -147,6 +149,19 @@ MonthlyBugReportUI              [Boundary]
 MonthlyBugReportController      [Controller]
 GenerateReport                  [Entity]
 
+#76 As a Triager, I want to generate a report for the number of bugs resolved 
+in a week so that I know the efficiency of the Developer team.
+WeeklyBugReportUI               [Boundary]
+WeeklyBugReportController       [Controller]
+GenerateReport                  [Entity]
+
+#77 As a Triager, I want to generate a report for the best performing reporter or 
+developer so that I can rely on them more heavily in the future due to their 
+experience on identifying and fixing bugs.
+PerformanceReportUI         [Boundary]
+PerformanceReportController [Controller]
+GenerateReport              [Entity]
+
 #79 As a User, I want to be able to search for bugs through keywords so that I can find the bug based on the description that I entered.
 SearchByKeywordUI               [Boundary]
 SearchByKeyworkController       [Controller]
@@ -161,22 +176,3 @@ BugList                         [Entity]
 SearchByAssigneeUI              [Boundary]
 SearchByAssigneeController      [Controller]
 BugList                         [Entity]
-
-//==============================================
-// NEW 13/11/2020
-//==============================================
-#76 As a Triager, I want to generate a report for the number of bugs resolved 
-in a week so that I know the efficiency of the Developer team.
-WeeklyBugReportUI          [Boundary]
-WeeklyBugReportController  [Controller]
-GenerateReport             [Entity]
-
-//==============================================
-// Work In Progress!
-//==============================================
-#77 As a Triager, I want to generate a report for the best performing reporter or 
-developer so that I can rely on them more heavily in the future due to their 
-experience on identifying and fixing bugs.
-PerformanceReportUI         [Boundary]
-PerformanceReportController [Controller]
-GenerateReport              [Entity]

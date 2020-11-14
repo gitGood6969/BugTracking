@@ -5,8 +5,6 @@
 // Import Libraries
 import javafx.application.Application; 
 import javafx.stage.Stage; 
-//import java.util.ArrayList; // To use the ArrayList variable container
-//import java.util.Arrays;    // To use Array containers
 
 public class BugTracking extends Application
 {

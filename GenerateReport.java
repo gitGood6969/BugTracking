@@ -1,5 +1,5 @@
 // Entity Class
-// [User Stories: #75, #76]
+// [User Stories: #75, #76, #77]
 
 // Package
 //package BugTracking;

@@ -414,18 +414,21 @@ public class BugList
             {
                 strArray[i] = tempArrayList.get(i);
             }
-                      
-            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter (file2)));
-            for(int j=0; j<tempArrayList.size(); j++)
+            
+            if(exist == true)
             {
-                writer.println(strArray[j]);
-            }                                                             
-            writer.close();
-      
+                PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter (file2)));
+                for(int j=0; j<tempArrayList.size(); j++)
+                {
+                    writer.println(strArray[j]);
+                }                                                             
+                writer.close();
+            }
         } catch (IOException e) {System.out.println("An error occurred."); e.printStackTrace();}
     	return exist;
     }
     
+    // Get list of bugs to be displayed
     public String[] GetBugsForComment()
     {
     	ArrayList<String> tempArrayList = new ArrayList<String>();
@@ -458,6 +461,7 @@ public class BugList
         return strArray;
     }
     
+    // Get the comments for the specific bug supplied in as a parameter 
     public String[] GetCommentForBug(String bug)
     {
     	ArrayList<String> tempArrayList = new ArrayList<String>();
@@ -509,6 +513,8 @@ public class BugList
          return strArray;
     }
     
+    // Method inserts a new comment into database
+    // Before inserting it would format the comment
     public boolean CommentStatus(String bugName, String bugDesc, String comment)
     {
     	ArrayList<String> tempArrayList = new ArrayList<String>();

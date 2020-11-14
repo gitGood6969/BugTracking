@@ -91,7 +91,9 @@ public class BugCommentUI
             @Override
             public void handle(ActionEvent event) 
             {
-            	input = bugNum.getText();
+            	input = bugNum.getText(); // Retrieve comments
+
+                // Validate if comment is empty or NULL
             	if (bugNum.getText() == null || bugNum.getText().trim().isEmpty())
                 {
                     Alert empty = new Alert(AlertType.WARNING);
@@ -101,7 +103,7 @@ public class BugCommentUI
                     bugNum.clear();
                 }
             	else if(bugNum.getText().matches(".*\\s.*") || !bugNum.getText().matches("[0-9]+") || Integer.parseInt(bugNum.getText())<=0)
-            	{
+            	{ // Validate if comment is just empty spaces
                     Alert space = new Alert(AlertType.WARNING);
                     space.setHeaderText("Bad input.");
                     space.setContentText("Please enter a number from 1 onwards!");
@@ -109,7 +111,7 @@ public class BugCommentUI
                     bugNum.clear();
             	}
             	else if(Integer.parseInt(bugNum.getText())>strArray.length)
-            	{
+            	{// check that the user input is within the arrays length if not it does not exist
                     Alert outOfBounds = new Alert(AlertType.ERROR);
                     outOfBounds.setHeaderText("Failed getting bug comments.");
                     outOfBounds.setContentText("The Bug Number " + input + " was not found.");
@@ -118,8 +120,13 @@ public class BugCommentUI
             	}
             	else
             	{
+                    // Calls controller class
                     BugCommentController ctrl = new BugCommentController();
+                    
+                    // Retrieve comments already made for the specific bug which has been selected
                     String[] strArray2 = ctrl.CreateComments(strArray[Integer.parseInt(input)-1]);
+
+                    // Transition to scene2 to add a new comment for the bug
                     stage.setScene(scene2(stage, strArray2));
             	}
             	
@@ -149,6 +156,7 @@ public class BugCommentUI
         return scene;
     }    
     
+    // Method calls controller class to retrieve entire list of bugs
     public static String[] GetListOfBugs(BugCommentController controller)
     {
         String[] strArray = controller.ViewBugsForComment();
@@ -217,6 +225,7 @@ public class BugCommentUI
             @Override
             public void handle(ActionEvent event) 
             {
+                // Validate if bugStatusField is NULL or empty
             	if(bugStatusField.getText() == null || bugStatusField.getText().trim().isEmpty())
             	{
                     Alert empty = new Alert(AlertType.ERROR);
@@ -225,10 +234,16 @@ public class BugCommentUI
                     empty.showAndWait();
                     bugStatusField.setText(bugInfo[3]);
             	}
-            	else
-            	{        
+            	else // If successful validation
+            	{   
+                    // Retrieve comment text
                     String comment = bugNewCommentField.getText();
+
+                    // Calls Controller Class
                     BugCommentController controller = new BugCommentController();
+
+                    // Calls the InsertComment method and send the comment data to the controller.
+                    // Controller will forward data to Entity class (BugList) to insert new comment in database.
                     if(controller.InsertComment(bugInfo[4], bugInfo[5], comment) == true)
                     {
                         stage.setScene(create(stage));
