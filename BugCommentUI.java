@@ -226,7 +226,7 @@ public class BugCommentUI
             public void handle(ActionEvent event) 
             {
                 // Validate if bugStatusField is NULL or empty
-            	if(bugCommentField.getText() == null || bugCommentField.getText().trim().isEmpty())
+            	if(bugNewCommentField.getText() == null || bugNewCommentField.getText().trim().isEmpty())
             	{
                     Alert empty = new Alert(AlertType.ERROR);
                     empty.setHeaderText("Empty Field Detected.");
