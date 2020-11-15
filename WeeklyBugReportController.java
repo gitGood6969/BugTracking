@@ -9,7 +9,6 @@ import java.util.ArrayList; // To use the ArrayList variable container
 import java.util.Arrays;    // To use Array containers.
 import java.time.LocalDate; // To be able to take in Date and manipulate it 
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter so can adjust the output of the date
-import java.lang.Math;      // To use the Absolute (Math.abs) method to return positive values during date comparison
 
 public class WeeklyBugReportController 
 {
@@ -58,34 +57,41 @@ public class WeeklyBugReportController
             // Check Array size
             if (sizeOfArray == 3) // That means there is a date in the format of dd/MM/yyyy
             {
-                // Format the date to a String of format "yyyy-MM-dd"
-                String tempDateFormat = tempArray[2] + "-" + tempArray[1] + "-" + tempArray[0];
-                
+                // Extract values year, month, day
+                int year = Integer.valueOf(tempArray[2]);
+                int month = Integer.valueOf(tempArray[1]);
+                int day = Integer.valueOf(tempArray[0]);
+
                 // Create Date object using the formatted date String
-                LocalDate dateTemp = LocalDate.parse(tempDateFormat);
+                LocalDate dateTemp = LocalDate.of(year, month, day);
 
-                // Obtain the difference in date and take it as an "absolute" value (No negative values)
-                int differenceFromStartDate = Math.abs(startDate.compareTo(dateTemp));
-                int differenceFromEndDate   = Math.abs(endDate.compareTo(dateTemp));
-
+                // Obtain the difference in date
+                boolean differenceFromStartDate = dateTemp.isAfter(startDate);
+                boolean differenceFromEndDate = dateTemp.isBefore(endDate);
+                boolean equalToStartDate = dateTemp.equals(startDate);
+                boolean equalToEndDate = dateTemp.equals(endDate);
+                
                 // Checks if the difference is within the threshold of a week
-                if (differenceFromStartDate <= numOfDaysPast && differenceFromEndDate <= numOfDaysPast)
+                if (differenceFromStartDate == true || equalToStartDate == true)    
                 {
-                    // If its within, we extract the relevant information and generate the report
-                    String bugName = strArr[4];
-                    String bugDescription = strArr[5];
- 
-                    // Calles method getDeveloperName to retrieve the developer's name
-                    String developerName = getDeveloperName(strArr[2]);
+                    if(differenceFromEndDate == true || equalToEndDate == true)
+                    {
+                        // If its within, we extract the relevant information and generate the report
+                        String bugName = strArr[4];
+                        String bugDescription = strArr[5];
 
-                    compiledReport.add("\nBug Name: " + bugName);
-                    compiledReport.add("Bug Description: " + bugDescription);
-                    compiledReport.add("Bug was fixed on: " + initial);  
-                    compiledReport.add("Bug was fixed by: " + developerName);
-                    counter++; // Increment counter
+                        // Calles method getDeveloperName to retrieve the developer's name
+                        String developerName = getDeveloperName(strArr[2]);
+
+                        compiledReport.add("\nBug Name: " + bugName);
+                        compiledReport.add("Bug Description: " + bugDescription);
+                        compiledReport.add("Bug was fixed on: " + initial);  
+                        compiledReport.add("Bug was fixed by: " + developerName);
+                        counter++; // Increment counter
+                    }
+                    else {} // If NOT, then the program ignores such lines   
                 }
-                else
-                {}  // If NOT, then the program ignores such lines   
+                else {} // If NOT, then the program ignores such lines     
             }
             else                
             {    

@@ -64,7 +64,7 @@ public class ReviewerBugListUI
         }        
         listUnfixed.setEditable(false); // Don't allow users to edit the list
 
-        Button buttonBack = new Button("Back");  // "back" button to go back the Reviewer homepage
+        Button buttonBack = new Button("Back");  // "back" button to go back the Developer homepage
         buttonBack.setOnAction(new EventHandler<ActionEvent>() 
         {// Handles what actions happened when the button is clicked.   
             @Override

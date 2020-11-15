@@ -158,9 +158,9 @@ GenerateReport                  [Entity]
 #77 As a Triager, I want to generate a report for the best performing reporter or 
 developer so that I can rely on them more heavily in the future due to their 
 experience on identifying and fixing bugs.
-PerformanceReportUI         [Boundary]
-PerformanceReportController [Controller]
-GenerateReport              [Entity]
+PerformanceReportUI         	[Boundary]
+PerformanceReportController 	[Controller]
+GenerateReport            	[Entity]
 
 #79 As a User, I want to be able to search for bugs through keywords so that I can find the bug based on the description that I entered.
 SearchByKeywordUI               [Boundary]

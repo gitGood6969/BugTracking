@@ -92,7 +92,7 @@ public class BugList
                     tempArrayList.add(bug);                
                 	
                 }
-                //Display bugs that have not been fixed to Reviewer
+                //Display bugs that have not been fixed to Developer
                 else if(Integer.parseInt(role) == 3 && Integer.parseInt(num) == 0 && !tempArray[3].equals("fixed"))
                 {
                     String bug = "Bug Reported Date: " + tempArray[6] + "\nBug Name: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\nBug Status: " + tempArray[3] + "\n";
