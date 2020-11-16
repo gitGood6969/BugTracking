@@ -244,7 +244,7 @@ public class BugCommentUI
 
                     // Calls the InsertComment method and send the comment data to the controller.
                     // Controller will forward data to Entity class (BugList) to insert new comment in database.
-                    if(controller.InsertComment(bugInfo[4], bugInfo[5], comment) == true)
+                    if(controller.InsertComment(bugInfo[4], bugInfo[5], bugInfo[6], comment) == true)
                     {
                         stage.setScene(create(stage));
                         alert.showAndWait();
