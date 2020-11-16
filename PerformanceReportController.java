@@ -163,7 +163,7 @@ public class PerformanceReportController
             {
                 if (record.getValue().compareTo(bestReporter.getValue()) == 0)
                 {// Compare values
-                    String appendText2 = "\nBest performing developer: " + record.getKey();
+                    String appendText2 = "\nBest performing Reporter: " + record.getKey();
                     reporterPerformance.add(appendText2);
                     appendText2 = "Total Number of Bugs Reported: " + record.getValue();
                     reporterPerformance.add(appendText2);
@@ -294,9 +294,9 @@ public class PerformanceReportController
         }
 
         // Add Best performing developer to compile report
-        String appendText = "Best performing developer: " + bestDeveloper.getKey();
+        String appendText = "Best performing Developer: " + bestDeveloper.getKey();
         developerPerformance.add(appendText);
-        appendText = "Total Number of Bugs Reported: " + bestDeveloper.getValue();
+        appendText = "Total Number of Bugs Resolved: " + bestDeveloper.getValue();
         developerPerformance.add(appendText);
 
         // Get developer whom are also TIED with the best developer    
@@ -307,9 +307,9 @@ public class PerformanceReportController
             {
                 if (record.getValue().compareTo(bestDeveloper.getValue()) == 0)
                 {// Compare values
-                    String appendText2 = "\nBest performing developer: " + record.getKey();
+                    String appendText2 = "\nBest performing Developer: " + record.getKey();
                     developerPerformance.add(appendText2);
-                    appendText2 = "Total Number of Bugs Reported: " + record.getValue();
+                    appendText2 = "Total Number of Bugs Resolved: " + record.getValue();
                     developerPerformance.add(appendText2);
                 }
                 else {} // Do nothing if it value is smaller than best developer
@@ -318,7 +318,7 @@ public class PerformanceReportController
         }
 
         // Adding header
-        appendText = "\nName : Number of Bugs Reported";
+        appendText = "\nName : Number of Bugs Resolved";
         developerPerformance.add(appendText);
 
         // Loop through the mergeMap and format data. 

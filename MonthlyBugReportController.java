@@ -90,9 +90,6 @@ public class MonthlyBugReportController
         // Arraylist used to compile and hold the final report to be displayed
         ArrayList<String> compiledReport = new ArrayList<String>();
 
-        // Add the first line to the report which is the total number of bugs 
-        compiledReport.add("Total Number of Bugs for the month: " + totalNumberOfBugs);
-
         int numOfDaysPast = 31;
         LocalDate endDate = startDate.plusDays(numOfDaysPast);
      
@@ -140,6 +137,17 @@ public class MonthlyBugReportController
                 // Program will ignore such lines.  
             }    
         }
+
+        // Set the format for the date to be displayed
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        String appendText = "To: " + endDate.format(dateFormat);
+        compiledReport.add(0, appendText);
+        appendText = "From: " + startDate.format(dateFormat);
+        compiledReport.add(0, appendText);
+        appendText = "Total Number of Bugs for the month:  " + totalNumberOfBugs;
+        compiledReport.add(0, appendText);
+
         return compiledReport;
     }
     
