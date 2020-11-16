@@ -92,7 +92,7 @@ public class BugList
                     tempArrayList.add(bug);                
                 	
                 }
-                //Display bugs that have not been fixed to Developer
+                //Display bugs that have not been fixed to Reviewer
                 else if(Integer.parseInt(role) == 3 && Integer.parseInt(num) == 0 && !tempArray[3].equals("fixed"))
                 {
                     String bug = "Bug Reported Date: " + tempArray[6] + "\nBug Name: " + tempArray[4] + "\nBug Description: " + tempArray[5] + "\nBug Status: " + tempArray[3] + "\n";
@@ -477,7 +477,10 @@ public class BugList
                 String[] tempArray2 = bug.split("\\r?\\n");
                 String bugName = tempArray2[1].substring(10);
                 String bugDesc = tempArray2[2].substring(17);
-                if(tempArray[4].equals(bugName) && tempArray[5].equals(bugDesc) && tempArray.length>8)
+                String bugReportedDate = tempArray2[0].substring(19);
+              
+                
+                if(tempArray[4].equals(bugName) && tempArray[5].equals(bugDesc) && tempArray[6].equals(bugReportedDate) && tempArray.length>8)
                 {
                     System.out.println(tempArray.length);
                     for(int i = 0; i<8 ;i++)
@@ -492,12 +495,12 @@ public class BugList
                     }
                    
                 }
-                else if(tempArray[4].equals(bugName) && tempArray[5].equals(bugDesc) && tempArray.length == 8)
+                else if(tempArray[4].equals(bugName) && tempArray[5].equals(bugDesc) && tempArray[6].equals(bugReportedDate) && tempArray.length == 8)
                 {              	
                     for(int i = 0; i<tempArray.length ;i++)
                     {
                     	tempArrayList.add(tempArray[i]);
-                    	System.out.println(tempArray[i]);
+                    	//System.out.println(tempArray[i]);
                     }
                 }
             }
@@ -515,7 +518,7 @@ public class BugList
     
     // Method inserts a new comment into database
     // Before inserting it would format the comment
-    public boolean CommentStatus(String bugName, String bugDesc, String comment)
+    public boolean CommentStatus(String bugName, String bugDesc, String dateReported, String comment)
     {
     	ArrayList<String> tempArrayList = new ArrayList<String>();
     	File file1 = new File("userlist.txt");
@@ -541,7 +544,7 @@ public class BugList
             {
             	String fileText = readFile2.nextLine();
             	String[] tempArray2 = fileText.split(":");
-            	if(tempArray2[4].equals(bugName) && tempArray2[5].equals(bugDesc))
+            	if(tempArray2[4].equals(bugName) && tempArray2[5].equals(bugDesc) && tempArray2[6].equals(dateReported))
             	{
                     fileText = fileText + "@_" + name + ";" + comment;
                     tempArrayList.add(fileText);
